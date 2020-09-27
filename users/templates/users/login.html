@@ -1,0 +1,90 @@
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  {% if title %}    
+    <title>{{title}}</title>
+  {% else %}
+    <title>BookED</title>
+  {% endif %}
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static  'assets/img/BookED_Logo1.png'  %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+  
+
+</head>
+
+<body>
+
+  <div class='fixed-top'>
+    {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{message}}
+            </div>
+          {% endfor %}
+    {% endif %}
+  </div>
+
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		
+		<div class="login-form">
+			<div class="sign-in-htm">
+				<div class="group">
+          <form method="POST">
+          {% csrf_token %}
+					<label for="user" class="label">Username</label>
+					{{  form.username }}
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					{{ form.password }}
+				</div>
+				<div class="group">
+          <button class="button" type="submit">Log In</button>
+        </div>
+       
+        <center>
+        <div class="group">
+       
+          <a  class="btn btn-primary btn-lg active"  href="{% provider_login_url 'google' method='js_sdk' %}" role="button" style="text-transform:none">
+            <img width="25px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            Login with Google
+          </a>
+        
+        </div>
+      </center>
+      <div class="hr"></div>
+				<div class="foot-lnk">
+          <a class="btn btn-outline-dark" href="{% url 'register' %}" role="button" style="text-transform:none">
+         Don't have account yet ? Sign Up !
+        </a>
+				</div>
+      </div>
+
+</body>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+        crossorigin="anonymous">
+        </script>
+
+</html>

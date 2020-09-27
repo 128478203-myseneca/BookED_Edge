@@ -1,0 +1,31 @@
+{%extends 'main/base.html'%}
+
+{% block content %}
+        <!-- ======= News ======= -->
+       <section id="featured-services" class="featured-services">
+            <div class="container">
+                 <article class="media content-section">
+                  <div class="icon-box">
+                    <div class="icon"><i class="icofont-newspaper"><h1>Latest News:</h1></i></div>
+                    {% for articless in articles %}
+                    <article class="media content-section">
+                        <div class="media-body">
+                          <div class="article-metadata">
+                            <br>
+                            <a  style="color:black;" class="article-author">Author: {{articless.author}}</a>
+                            <a style="color:black;" class="text-muted">{{articless.date}}</a>
+                          </div>
+                          <h2><a style="color:black;" class="article-title">{{articless.title}}</a></h2>
+                          <a style="color:black;" class="article-content" href="{{articless.url}}">{{articless.description}}</a>
+                        </div>
+                      </article>
+                      <br>
+                    {% endfor %}
+                  </div>
+                </div>
+            </div>
+          </section> 
+{% endblock content %}
+
+
+

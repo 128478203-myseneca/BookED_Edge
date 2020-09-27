@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  {% if title %}    
+    <title>{{title}}</title>
+  {% else %}
+    <title>BookED</title>
+  {% endif %}
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static  'assets/img/BookED_Logo1.png'  %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class='fixed-top'>
+    {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{message}}
+            </div>
+          {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="login-wrap">
+    <div class="login-html">
+      <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+      
+      <div class="login-form">
+        <div class="sign-in-htm">
+          <div class="group">
+            <form method="POST">
+            {% csrf_token %}
+            <label for="user" class="label">Title</label>
+            {{  form.title }}
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Content</label>
+            {{ form.content }}
+          </div>
+          <div class="group">
+            <label for="pass" class="label">School You are Currently Studying At</label>
+            {{ form.schools}}
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Semester</label>
+            {{ form.semester }}
+          </div>
+          <div class="group">
+            <label for="pass" class="label">ISBN Number</label>
+            {{ form.isbn }}
+          </div>
+          <div class="group">
+            <button class="button" type="submit">Post</button>
+          </div>
+        </div>
+
+  
+
+</body>
+</html>

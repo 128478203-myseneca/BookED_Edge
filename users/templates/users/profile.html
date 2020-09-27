@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  {% if title %}    
+    <title>{{title}}</title>
+  {% else %}
+    <title>BookED</title>
+  {% endif %}
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static  'assets/img/BookED_Logo1.png'  %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/profile.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+<header id="header" class="fixed-top">
+
+  <div class="container d-flex align-items-center">
+
+    <a href="/"><img src="{% static 'assets/img/BookED_Logo1.png' %}" alt="MainLogo" class="img-fluid" width="100" height="100"></a>
+
+    <nav class="nav-menu d-none d-lg-block">
+      <ul>
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/market">Marketplace</a></li>
+        <li><a href="#services">FAQs</a></li>
+        <li><a href="#portfolio">Partners</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+
+      </ul>
+    </nav><!-- .nav-menu -->
+
+    {% if user.is_authenticated %}
+    <a href="/logout" class="get-logout-btn scrollto">Logout</a>
+    <a href="/profile" class="get-started-btn scrollto">Profile</a>
+    {% else %}
+    <a href="/login" class="get-started-btn scrollto">Login</a>
+    <a href="/register" class="get-register-btn scrollto">Register</a>
+    {% endif %}
+
+  </div>
+  
+</header><!-- End Header -->
+
+{% if messages %}
+{% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible">
+    <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {{message}}
+  </div>
+{% endfor %}
+{% endif %}
+	<!-- partial -->
+  <div class="main-panel">
+    <div class="container">
+
+
+      <div class="row">
+
+        <div class="col-md-4 grid-margin stretch-card">
+
+          <div class="card">
+
+            <div class="profile-card">
+
+              <div class="profile-header">
+
+                <div class="cover-image">
+                  <img src="{{user.profile.image_back.url}}" class="img img-fluid">
+                </div>
+
+                <div class="user-image">
+                  <img src="{{user.profile.image.url}}" class="img ">
+                </div>
+              </div>
+
+              <div class="profile-content">
+
+                <div class="profile-name">{{user.username}}</div>
+
+                <div class="profile-designation">{{user.email}}</div>
+
+                <ul class="profile-info-list">
+
+                  <a href="" class="profile-info-list-item"><i class="mdi mdi-bookmark-check"></i>Posts</a>
+
+                  <a class="profile-info-list-item" href="{% url 'Main-Market' %}"><i class="mdi mdi-eye"></i>Marketplace</a>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8 grid-margin stretch-card">
+          
+              <ul class="about"> 
+              {% load crispy_forms_tags %}
+                
+                    <div class="container">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                <legend class="border-bottom mb-4">Update Information</legend>
+                                {{ u_form|crispy }} 
+                                {{ p_form|crispy }} <!-- the | tells what filter to use in this case crispy-->
+                            </fieldset>
+                            <div class="form-group">
+                                <button class="btn btn-outline-info" type="submit">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+</html>

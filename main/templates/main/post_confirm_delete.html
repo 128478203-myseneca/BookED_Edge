@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  {% if title %}    
+    <title>{{title}}</title>
+  {% else %}
+    <title>BookED</title>
+  {% endif %}
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static  'assets/img/BookED_Logo1.png'  %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="login-wrap">
+      <div class="login-html">
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Deletion</label>
+        <div class="login-form">
+          <div class="sign-in-htm">
+            <div class="group">
+              <form method="POST">
+                {% csrf_token %}
+              <div class="group">
+                <h3 class="dangerous">Are you sure you want to delete "{{ object }}"?</h3> 
+              </div>
+            <div class="group">
+              <input type="submit" value="Confirm" class="btn btn-danger btn-sm mt-1 mb-1"></input>
+              <a href="{% url 'Main-Home' %}" class="btn btn-secondary btn-sm mt-1 mb-1">Never Mind</a>
+            </div>
+            
+          </div>
+
+
+
+</form> 
+
+</body>
+</html>
