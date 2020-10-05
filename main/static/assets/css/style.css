@@ -1649,3 +1649,9 @@ a.article-title:hover {
   line-height: 35px;
   font-size: 0.9rem;
 }
+
+.bookImage{
+  float: right;
+  width: 200px;
+  height: 200px;
+}

@@ -27,6 +27,7 @@ class Semester(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=200, default='not declared')
+   # school = models.ForeignKey(School, on_delete=models.CASCADE,null=True, blank=True)
  
     class Meta:
         db_table = '3- Course'
@@ -38,9 +39,8 @@ class Course(models.Model):
 
 class Class(models.Model):
     name = models.CharField(max_length=200, default='not declared' )
-    school = models.ManyToManyField(School)
-    semester = models.ManyToManyField(Semester)
-    course = models.ManyToManyField(Course)
+   # course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+   # semester = models.ManyToManyField(Semester)
     
     class Meta:
         db_table = '4- Class'
@@ -54,12 +54,26 @@ class Book(models.Model):
     Publisher = models.CharField(max_length=30)
     Year = models.DateTimeField(default=timezone.now)
     classes = models.ManyToManyField(Class)
+    schools = models.ManyToManyField(School)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+    book_img = models.ImageField(upload_to='books_image',default='default.jpg')
 
     class Meta:
         db_table = '5- Books'
 
     def __str__(self):
         return self.Title
+
+    def save(self, **kwargs):
+            super().save()
+
+            img = Image.open(self.book_img.path)
+
+            if img.height > 300 or img.width > 300:
+                output_size = (300, 300)
+                img.thumbnail(output_size)
+                img.save(self.book_img.path)
+        
 
 
 class Post(models.Model):
@@ -72,8 +86,7 @@ class Post(models.Model):
     semester = models.ForeignKey('Semester', null=True, blank=True, on_delete=models.CASCADE)
     objects = models.Manager()
     isbn = models.IntegerField(default=000)
-    #add course
-
+ 
     def __str__(self):
         return self.title
 
