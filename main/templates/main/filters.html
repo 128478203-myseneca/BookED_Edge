@@ -43,6 +43,7 @@
          {% if user.is_authenticated %}
          <a href="/logout" class="get-logout-btn scrollto">Logout</a>
          <a href="/profile" class="get-started-btn scrollto">Profile</a>
+         <a href="{% url 'Post-Create' %}" class="get-post-btn scrollto">New Post</a>
          {% else %}
          <a href="/login" class="get-started-btn scrollto">Login</a>
          <a href="/register" class="get-register-btn scrollto">Register</a>
@@ -92,6 +93,24 @@
                 {% endfor %}
              </select>
         </div>
+        <div class="form-group col-md-4">
+          <label for="category">Class:</label>
+          <select id="classes" class="form-control" name="classes">
+              <option selected>Class You are Engaged</option>
+              {% for class in classes_all %}
+              <option value="{{ class }}">{{ class }}</option>
+              {% endfor %}
+           </select>
+      </div>
+      <div class="form-group col-md-4">
+          <label for="category">Course:</label>
+          <select id="course" class="form-control" name="course">
+              <option selected>Course You are Engaged</option>
+              {% for course in course_all %}
+              <option value="{{ course }}">{{ course }}</option>
+              {% endfor %}
+           </select>
+      </div>
           <div class="form-group col-md-2 col-lg-2">
             <label for="viewCountMin">Semester</label>
             <input type="number" min=0 class="form-control" id="semester" placeholder='Leave blank of not sure...' name="semester">
@@ -117,26 +136,38 @@
       </form>
 
       <hr />
+        <h2>Filtered Posts</h2>
+        <br>
         <ul>
             {% for post in queryset %}
-            <div class="container" id="market">
-              <article class="media content-section">
+          <div class="container">
+            <div class="blog-card alt">
+              <div class="meta">
+                <div class="photo" style="background-image: url({{post.post_img.url}})"></div>
+                <ul class="details">
+                  <li class="author"><a href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></li>
+                  <li class="date">{{ post.date_posted|date:"F d, Y" }}</li>
+                  <li class="tags">
+                    <ul>
+                      <li><a href="{% url 'User-Posts' post.author.username %}">School : {{  post.schools }}</a></li>
+                      <li><a href="{% url 'User-Posts' post.author.username %}">Semester : {{  post.semester }}</a></li>
+                      <li><a href="{% url 'User-Posts' post.author.username %}">ISBN Number : {{  post.isbn }}</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="description">
                 <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-                <div class="media-body">
-                  <div class="article-metadata">
-                    <a class="mr-2" href="{% url 'User-Posts' post.author.username %}">{{ post.author }}</a>
-                    <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-                  </div>
-                  <h2 class="article-title"><a href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
-                  <!-- <h5 class="article-content">School : {{  post.author.profile.school }}</h5> -->
-                  <h5 class="article-content">School : {{  post.schools }}</h5>
-                  <h5 class="article-content">Semester : {{  post.semester }}</h5>
-                  <h5 class="article-content">ISBN Number : {{  post.isbn }}</h5>
-                  <p class="article-content">{{ post.content|truncatewords:50 }}</p>
-                </div>
-              </article>
-          </div>
-          <br>
+                <a class="mr-2" href="{% url 'User-Posts' post.author.username %}">{{ post.author }}</a>
+                <h1><a href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h1>
+                <h2>{{ post.date_posted|date:"F d, Y" }}</h2>
+                <p>{{ post.content|truncatewords:50 }}</p>
+                <p class="read-more">
+                  <a href="{% url 'User-Posts' post.author.username %}">Read More...</a>
+                </p>
+              </div>
+            </div>
+              <br>
           {% endfor %}
         </ul>
   

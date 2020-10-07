@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='Main-Home'),
@@ -13,3 +15,7 @@ urlpatterns = [
     path('post/new/', PostCreateView.as_view(), name='Post-Create'), #set primarykey of posts which is the id
     path('market/', PostListView.as_view(), name='Main-Market'),
 ]
+
+if settings.DEBUG:
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

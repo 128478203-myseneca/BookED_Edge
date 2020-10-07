@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
+from django.core.paginator import Paginator
 
 
 class School(models.Model):
@@ -79,19 +80,33 @@ class Book(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=50) #title length restriction 50
     content = models.TextField(max_length=500) #content lenght restricted to 500
-    date_posted = models.DateTimeField(default=timezone.now) #gets time that the post is made
-    author = models.ForeignKey(User, on_delete=models.CASCADE) #deleted post if user is deleted
-    sponsored = models.BooleanField(default=False)
     schools = models.ForeignKey('School', null=True, blank=True, on_delete=models.CASCADE)
+    classes = models.ManyToManyField(Class)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+    date_posted = models.DateTimeField(default=timezone.now) #gets time that the post is made
     semester = models.ForeignKey('Semester', null=True, blank=True, on_delete=models.CASCADE)
     objects = models.Manager()
     isbn = models.IntegerField(default=000)
+    post_img = models.ImageField(upload_to='post_image',default='default.jpg')
+    author = models.ForeignKey(User, on_delete=models.CASCADE) #deleted post if user is deleted
+    sponsored = models.BooleanField(default=False)
  
     def __str__(self):
         return self.title
 
+    def save(self, **kwargs):
+            super().save()
+
+            img = Image.open(self.post_img.path)
+
+            if img.height > 300 or img.width > 300:
+                output_size = (300, 300)
+                img.thumbnail(output_size)
+                img.save(self.post_img.path)
+
     def get_absolute_url(self):
         return reverse('Post-Detail', kwargs={'pk': self.pk}) #when person creates post redirects itself to the created post after submitted
 
-
+    class Meta:
+        ordering = ['-date_posted']
 

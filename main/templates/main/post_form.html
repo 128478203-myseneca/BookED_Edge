@@ -40,12 +40,12 @@
 
   <div class="login-wrap">
     <div class="login-html">
-      <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+      <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Create Post</label>
       
       <div class="login-form">
         <div class="sign-in-htm">
           <div class="group">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="user" class="label">Title</label>
             {{  form.title }}
@@ -55,8 +55,16 @@
             {{ form.content }}
           </div>
           <div class="group">
-            <label for="pass" class="label">School You are Currently Studying At</label>
+            <label for="pass" class="label">School</label>
             {{ form.schools}}
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Courses</label>
+            {{ form.course}}
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Classes</label>
+            {{ form.classes}}
           </div>
           <div class="group">
             <label for="pass" class="label">Semester</label>
@@ -65,6 +73,10 @@
           <div class="group">
             <label for="pass" class="label">ISBN Number</label>
             {{ form.isbn }}
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Image</label>
+            {{ form.post_img }}
           </div>
           <div class="group">
             <button class="button" type="submit">Post</button>
