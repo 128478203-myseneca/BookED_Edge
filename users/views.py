@@ -14,7 +14,7 @@ def register(request):  #command to register the user to the database
         if form.is_valid():
             form.save() #save credentials if valid
             username = form.cleaned_data.get('username') #get username 
-            messages.success(request, f'Welcome {username} your account has just been created !') #alert menssage
+            messages.success(request, f'Welcome {username} your account has just been created ! Go to your Profile to select your school !') #alert menssage
             return redirect('Main-Home') #redirect to main page
     else:
         form = UserRegisterForm()

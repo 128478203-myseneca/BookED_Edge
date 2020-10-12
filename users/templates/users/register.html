@@ -36,7 +36,7 @@
           {% endfor %}
     {% endif %}
   </div>
-
+  {% load crispy_forms_tags %}
     <div class="login-wrap">
       <div class="login-html">
         <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign Up</label>
@@ -69,7 +69,6 @@
               <label for="pass" class="label">Email Address</label>
               {{ form.email }}
             </div>
-           
             <div class="group">
               <button class="button"type="submit">Sign Up</button>
             </div>
