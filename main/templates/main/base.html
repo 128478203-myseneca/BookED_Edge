@@ -81,8 +81,8 @@
 
       {% if user.is_authenticated %}
       <a href="/profile" class="get-started-btn scrollto">Profile</a>
-      <a href="/logout" class="get-logout-btn scrollto">Logout</a>
       <a href="{% url 'Post-Create' %}" class="get-post-btn scrollto">New Post</a>
+
       {% else %}
       <a href="/login" class="get-started-btn scrollto">Login</a>
       <a href="/register" class="get-register-btn scrollto">Register</a>
@@ -102,7 +102,7 @@
           <h2>By reselling your used book you help students out with their tight budgets and help preserve the nature by reusing it</h2>
           <div class="d-flex">
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="venobox btn-watch-video" data-vbtype="video" data-autoplay="true"> Watch Video <i class="icofont-play-alt-2"></i></a>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="venobox btn-watch-video" data-vbtype="video" data-autoplay="true"> Watch Video <i class="icofont icofont-youtube-play"></i></a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">

@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 
 class School(models.Model):
-    name = models.CharField(max_length=200, default='not declared')
+    name = models.CharField(max_length=200, default='not declared', null=True, blank=True)
 
 
     class Meta:

@@ -14,14 +14,15 @@ def register(request):  #command to register the user to the database
         if form.is_valid():
             form.save() #save credentials if valid
             username = form.cleaned_data.get('username') #get username 
-            messages.success(request, f'Welcome {username} your account has just been created ! Go to your Profile to select your school !') #alert menssage
-            return redirect('Main-Home') #redirect to main page
+            messages.success(request, f'Welcome {username} your account has just been created ! Please log in back to select the institution you study at :)') #alert menssage
+            return redirect('login') #redirect to main page
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form}) #keeps on the screen what the user wrote if it reloads because of invalid credentials
 
 @login_required #adds functionality to the function
 def profile(request): #command to login user
+    
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, 

@@ -27,6 +27,7 @@
 
  
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/filter.css' %}" rel="stylesheet">
 
 </head>
 
@@ -61,8 +62,8 @@
       </nav>
 
       {% if user.is_authenticated %}
-      <a href="/logout" class="get-logout-btn scrollto">Logout</a>
       <a href="/profile" class="get-started-btn scrollto">Profile</a>
+      <a href="{% url 'Post-Create' %}" class="get-post-btn scrollto">New Post</a>
       {% else %}
       <a href="/login" class="get-started-btn scrollto">Login</a>
       <a href="/register" class="get-register-btn scrollto">Register</a>
@@ -75,25 +76,30 @@
   <section id="hero" class="d-flex align-items-center">
     <div class="container">
         {% block content %}
-        <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="{% url 'User-Posts' object.author.username %}">{{ object.author }}</a>
-              <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-              {% if object.author == user %}
-              <a href="{% url 'Post-Update' object.id %}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
-              <a href="{% url 'Post-Delete' object.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Delete</a>
-              {% endif %}
+
+        <div class="container">
+          <div class="blog-card alt">
+            <div class="meta">
+              <div class="photo" style="background-image: url({{post.post_img.url}})"></div>
+              
+                {% if object.author == user %}
+                <a href="{% url 'Post-Update' object.id %}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
+                <a href="{% url 'Post-Delete' object.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Delete</a>
+                {% endif %}
             </div>
-            <h2 class="article-title">{{ object.title }}</h2>
-            <h5 class="article-content">School : {{  post.schools }}</h5>
-            <h5 class="article-content">Semester : {{  post.semester }}</h5>
-            <h5 class="article-content">ISBN Number : {{  post.isbn }}</h5>
-            <p class="article-content">{{ object.content }}</p>
+            <div class="description">
+              <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+              <a class="mr-2" href="{% url 'User-Posts' post.author.username %}">{{ object.author }}</a>
+              <h1><a href="{% url 'Post-Detail' post.id %}">{{ object.title }}</a></h1>
+              <h2>{{ object.date_posted|date:"F d, Y" }}</h2>
+              <p>{{ object.content }}</p>
+              <p>School : {{  object.schools }}</p>
+              <p>Semester : {{  object.semester }}</p>
+              <p>ISBN Number : {{  object.isbn }}</p>
+            </div>
           </div>
-          
-        </article>
+            <br>
+  
       {% endblock content %}
     </div>
   </section>

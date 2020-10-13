@@ -145,7 +145,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PATK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/profile'
 
 LOGIN_URL = 'login' #redirects /profile to /login if you are not logged in
 

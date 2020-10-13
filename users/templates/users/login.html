@@ -33,13 +33,12 @@
 <body>
 
   <div class='fixed-top'>
-    {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-              {{message}}
-            </div>
-          {% endfor %}
-    {% endif %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible">
+      <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      {{message}}
+    </div>
+  {% endfor %}
   </div>
 
 <div class="login-wrap">
