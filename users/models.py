@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
 import main
+from django.contrib.auth.forms import UserCreationForm
 
 
 
@@ -10,6 +11,9 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics') #default profile image
     image_back = models.ImageField(default='default_back.jpg', upload_to='background_pics') #default profile image
     school = models.ManyToManyField(main.models.School)
+    course = models.ManyToManyField(main.models.Course)
+    classes = models.ManyToManyField(main.models.Class)
+    semester = models.ManyToManyField(main.models.Semester)
     
 
     def __str__(self): #if you dont have it the page onlsschools will display "profile object" tunder

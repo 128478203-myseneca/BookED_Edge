@@ -8,11 +8,9 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  {% if title %}    
-    <title>{{title}}</title>
-  {% else %}
-    <title>BookED</title>
-  {% endif %}
+
+  <title>Book ED - Login</title>
+
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -61,7 +59,8 @@
           <button class="button" type="submit">Log In</button>
         </div>
        
-        <center>
+      <center>
+
         <div class="group">
        
           <a  class="btn btn-primary btn-lg active"  href="{% provider_login_url 'google' method='js_sdk' %}" role="button" style="text-transform:none">
@@ -70,6 +69,7 @@
           </a>
         
         </div>
+
       </center>
       <div class="hr"></div>
 				<div class="foot-lnk">
@@ -83,7 +83,6 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-        crossorigin="anonymous">
-        </script>
+        crossorigin="anonymous"> </script>
 
 </html>

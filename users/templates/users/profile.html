@@ -6,11 +6,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  {% if title %}    
-    <title>{{title}}</title>
-  {% else %}
-    <title>BookED</title>
-  {% endif %}
+  <title>Book ED - Profile</title>
+
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -96,6 +93,9 @@
 
                   <a class="profile-info-list-item" href="{% url 'Main-Market' %}"><i class="mdi mdi-eye"></i>Marketplace</a>
 
+                  <a class="profile-info-list-item" href=" {% url 'password_reset' %}"><i class="mdi mdi-eye"></i>Change Password</a>
+                 
+
                 </ul>
               </div>
             </div>
@@ -113,6 +113,10 @@
                             <fieldset class="form-group">
                                 <legend class="border-bottom mb-4">Update Information</legend>
                                 {{ u_form|crispy }} 
+
+                                <br>
+
+                            <legend class="border-bottom mb-4">Update Book Filtering By</legend>
                                 {{ p_form|crispy }} <!-- the | tells what filter to use in this case crispy-->
                             </fieldset>
                             <div class="form-group">

@@ -143,7 +143,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #directory for external uploaded files
 MEDIA_URL = '/media/'
 
-CRISPY_TEMPLATE_PATK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/profile'
 

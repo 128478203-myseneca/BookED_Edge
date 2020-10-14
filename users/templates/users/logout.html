@@ -6,11 +6,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  {% if title %}    
-    <title>{{title}}</title>
-  {% else %}
-    <title>BookED</title>
-  {% endif %}
+
+  <title>Book ED - Logout</title>
 
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
@@ -26,27 +23,21 @@
 
 <body>
 
-  <div class='fixed-top'>
-    {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-              {{message}}
-            </div>
-          {% endfor %}
-    {% endif %}
-  </div>
-
-
 <div class="log">
     <div class="container">
         <div class="border-top pt-3">
             <h3>Cya later, You have been logged out !</h3>
             <small class="text-muted">
-                Oh no I have misclick <a href="{% url 'login' %}">Login Back</a>
+                Oh no I have have pressed the wrong button <a href="{% url 'login' %}">Login Back</a>
             </small>
+
         </div>
     </div>
+    <img src  ="{% static  'assets/img/unnamed.gif'  %}"></img>
 </div>
+
+
+
 
 </body>
 </html>

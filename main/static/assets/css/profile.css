@@ -190,6 +190,7 @@ a.about-item-edit {
     float: right;
 }
 
+/* phone */
 @media (max-width: 992px) { 
 
 	.card  {
@@ -199,7 +200,7 @@ a.about-item-edit {
 
 	.about {
 
-		margin-top: 180%;
+		margin-top: 200%;
 
 	}
 

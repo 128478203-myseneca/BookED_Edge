@@ -66,7 +66,7 @@ body{
 .blog-card .details .author:before {
 	font-family: FontAwesome;
 	margin-right: 10px;
-	content: "\f007";
+	content: "\f067";
 }
 .blog-card .details .date:before {
 	font-family: FontAwesome;
@@ -75,7 +75,7 @@ body{
 }
 .blog-card .details .tags ul:before {
 	font-family: FontAwesome;
-	content: "\f02b";
+	content: "\f097";
 	margin-right: 10px;
 }
 .blog-card .details .tags li {

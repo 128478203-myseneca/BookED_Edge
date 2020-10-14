@@ -8,7 +8,7 @@ import main
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image','school']
+        fields = ['school','course','classes','semester','image']
 
 
 class UserRegisterForm(UserCreationForm):
@@ -30,5 +30,5 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta: #gives netet name space for configuration in one place so whenever you save it gonna save to the user model
         model = User
-        fields = ['username','first_name','last_name', 'email'] #fields in the form and in what order
+        fields = ['first_name','last_name', 'email'] #fields in the form and in what order
 
