@@ -14,6 +14,7 @@ from .models import Class as Classes
 import datetime as dt
 from django.core.paginator import Paginator
 import users
+from django.shortcuts import redirect
 
 
 
@@ -64,62 +65,68 @@ def filters2(request):
 
 #start of filter/find your book
 def filters(request):
-    schools_all = request.user.profile.school.order_by('name')
-    course_all = request.user.profile.course.order_by('name') 
-    classes_all = request.user.profile.classes.order_by('name')
-    semester_all = request.user.profile.semester.order_by('semester')
-    #schools_all = School.objects.order_by('name') #alphabetical order
-    #course_all = Course.objects.order_by('name') #alphabetical order
-    #classes_all = Classes.objects.order_by('name') #alphabetical order
-    qs = Post.objects.all() #Post.objects.all().order_by('-date_posted')
-    title_contains_query = request.GET.get('title_contains')
-    isbn_query = request.GET.get('title_or_author')
-    semester_query = request.GET.get('semester')
-    date_min = request.GET.get('date_min')
-    date_max = request.GET.get('date_max')
-    schools_query = request.GET.get('schools')
-    sponsored_query = request.GET.get('sponsored')
-    classes_query = request.GET.get('classes')
-    course_query = request.GET.get('course')
 
-    #only display books that matches the queries
+    if  request.user.is_anonymous: #return to main page if it is anonymous
+        return redirect('Main-Home')
 
-    if is_calid_queryparam(title_contains_query): 
-        qs = qs.filter(title__icontains=title_contains_query) 
+    else:
 
-    if is_calid_queryparam(isbn_query): 
-        qs = qs.filter(isbn__icontains=isbn_query) 
+        schools_all = request.user.profile.school.order_by('name')
+        course_all = request.user.profile.course.order_by('name') 
+        classes_all = request.user.profile.classes.order_by('name')
+        semester_all = request.user.profile.semester.order_by('semester')
+        #schools_all = School.objects.order_by('name') #alphabetical order
+        #course_all = Course.objects.order_by('name') #alphabetical order
+        #classes_all = Classes.objects.order_by('name') #alphabetical order
+        qs = Post.objects.all() #Post.objects.all().order_by('-date_posted')
+        title_contains_query = request.GET.get('title_contains')
+        isbn_query = request.GET.get('title_or_author')
+        semester_query = request.GET.get('semester')
+        date_min = request.GET.get('date_min')
+        date_max = request.GET.get('date_max')
+        schools_query = request.GET.get('schools')
+        sponsored_query = request.GET.get('sponsored')
+        classes_query = request.GET.get('classes')
+        course_query = request.GET.get('course')
 
-    if is_calid_queryparam(semester_query):
-        qs = qs.filter(semester=semester_query) 
+        #only display books that matches the queries
 
-    if is_calid_queryparam(date_min):
-        qs = qs.filter(date_posted__gte=date_min)
-        
-    if is_calid_queryparam(date_max):
-        qs = qs.filter(date_posted__lt=date_max)
+        if is_calid_queryparam(title_contains_query): 
+            qs = qs.filter(title__icontains=title_contains_query) 
 
-    if is_calid_queryparam(schools_query) and schools_query != 'Institution You are Engaged':
-        qs = qs.filter(schools__name=schools_query)
+        if is_calid_queryparam(isbn_query): 
+            qs = qs.filter(isbn__icontains=isbn_query) 
 
-    if is_calid_queryparam(classes_query) and classes_query != 'Class You are Engaged': 
-        qs = qs.filter(classes__name=classes_query) 
+        if is_calid_queryparam(semester_query):
+            qs = qs.filter(semester=semester_query) 
 
-    if is_calid_queryparam(course_query) and course_query != 'Course You are Engaged':
-        qs = qs.filter(course__name=course_query) 
+        if is_calid_queryparam(date_min):
+            qs = qs.filter(date_posted__gte=date_min)
+            
+        if is_calid_queryparam(date_max):
+            qs = qs.filter(date_posted__lt=date_max)
 
-    if sponsored_query == 'on':
-        qs = qs.filter(sponsored=True)
+        if is_calid_queryparam(schools_query) and schools_query != 'Institution You are Engaged':
+            qs = qs.filter(schools__name=schools_query)
 
-    #gotta put here everthing that goes to the html page
-    context = {
-        'queryset' : qs,
-        'schools_all' : schools_all,
-        'course_all' : course_all,
-        'classes_all' : classes_all,
-        'semester_all': semester_all
-    }
-    return render(request,"main/filters.html", context)
+        if is_calid_queryparam(classes_query) and classes_query != 'Class You are Engaged': 
+            qs = qs.filter(classes__name=classes_query) 
+
+        if is_calid_queryparam(course_query) and course_query != 'Course You are Engaged':
+            qs = qs.filter(course__name=course_query) 
+
+        if sponsored_query == 'on':
+            qs = qs.filter(sponsored=True)
+
+        #gotta put here everthing that goes to the html page
+        context = {
+            'queryset' : qs,
+            'schools_all' : schools_all,
+            'course_all' : course_all,
+            'classes_all' : classes_all,
+            'semester_all': semester_all
+        }
+        return render(request,"main/filters.html", context)
 
 #logic for marketplace view and ordering of posts
 class PostListView(ListView):
