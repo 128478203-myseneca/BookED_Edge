@@ -15,6 +15,7 @@ import datetime as dt
 from django.core.paginator import Paginator
 import users
 from django.shortcuts import redirect
+from django.contrib import messages
 
 
 
@@ -67,7 +68,10 @@ def filters2(request):
 def filters(request):
 
     if  request.user.is_anonymous: #return to main page if it is anonymous
-        return redirect('Main-Home')
+
+        messages.warning(request, f'Please create a account to use the filter feature !!!') #alert menssage
+        return redirect('login')
+       
 
     else:
 
