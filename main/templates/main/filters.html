@@ -98,7 +98,7 @@
       <div class="form-row">
          <div class="form-group col-md-4">
             <label for="category">School:</label>
-            <select id="category" class="form-control" name="schools">
+            <select id="category" class="form-control" name="schools" readonly>
               <!-- <option selected>Institution You are Engaged</option> -->
                 {% for school in schools_all %}
                 <option value="{{ school }}">{{ school }}</option>
@@ -107,7 +107,7 @@
         </div>
         <div class="form-group col-md-4">
           <label for="category">Course:</label>
-          <select id="course" class="form-control" name="course">
+          <select id="course" class="form-control" name="course" readonly>
              <!-- <option selected>Course You are Engaged</option> -->
               {% for course in course_all %}
               <option value="{{ course }}">{{ course }}</option>
@@ -116,7 +116,7 @@
       </div>
         <div class="form-group col-md-4">
           <label for="category">Class:</label>
-          <select id="classes" class="form-control" name="classes">
+          <select id="classes" class="form-control" name="classes" readonly>
               {% for class in classes_all %}
               <option value="{{ class }}">{{ class }}</option>
               {% endfor %}
@@ -124,7 +124,7 @@
       </div>
           <div class="form-group col-md-2 col-lg-2">
             <label for="category">Class:</label>
-            <select id="semester" class="form-control" name="semester">
+            <select id="semester" class="form-control" name="semester" readonly>
                 {% for semesters in semester_all %}
                 <option value="{{ semesters }}">{{ semesters }}</option>
                 {% endfor %}

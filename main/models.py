@@ -11,7 +11,8 @@ class School(models.Model):
 
 
     class Meta:
-        db_table = '1- School'
+        verbose_name_plural = "Schools"
+        ordering = ["name"]
 
 
     def __str__(self):                           
@@ -21,7 +22,9 @@ class Semester(models.Model):
     semester = models.CharField(max_length=1)
 
     class Meta:
-        db_table = '2- Semester'
+        verbose_name_plural = "Semesters"
+       
+
 
     def __str__(self):
         return self.semester
@@ -31,7 +34,9 @@ class Course(models.Model):
    # school = models.ForeignKey(School, on_delete=models.CASCADE,null=True, blank=True)
  
     class Meta:
-        db_table = '3- Course'
+        verbose_name_plural = "Courses"
+        ordering = ["name"]
+
 
     def __str__(self):
         return self.name
@@ -44,7 +49,9 @@ class Class(models.Model):
    # semester = models.ManyToManyField(Semester)
     
     class Meta:
-        db_table = '4- Class'
+        verbose_name_plural = "Classes"
+        ordering = ["name"]
+
 
     def __str__(self):
         return self.name
