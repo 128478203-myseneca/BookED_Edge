@@ -55,6 +55,8 @@
        </div>
      </header>
   <body>
+
+    {% load main_extras %}
    
 
     <main role="main" class="container">
@@ -155,7 +157,7 @@
         <h2>Filtered Posts</h2>
         <br>
         <ul>
-            {% for post in queryset %}
+            {% for post in post_page_obj %}
           <div class="container">
             <div class="blog-card alt">
               <div class="meta">
@@ -186,6 +188,18 @@
               <br>
           {% endfor %}
         </ul>
+        <div class="container" style="text-align: center;"> 
+            {% if post_page_obj.has_previous %}
+            <a href="{% my_url 1 'page' request.GET.urlencode %}" class="btn btn-success mb-4"><< First</a>
+            <a href="{% my_url post_page_obj.previous_page_number 'page' request.GET.urlencode %}" class="btn btn-success mb-4"> < Previous</a>
+            {% endif %}
+    
+            {% if  post_page_obj.has_next %}
+            <a href="{% my_url post_page_obj.next_page_number 'page' request.GET.urlencode %}" class="btn btn-success mb-4">Next ></a>
+            <a href="{% my_url post_page_obj.paginator.num_pages 'page' request.GET.urlencode %}" class="btn btn-success mb-4">Last >></a>
+            {% endif %}
+          </div>
+          
   
 
     </main>

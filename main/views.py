@@ -16,7 +16,7 @@ from django.core.paginator import Paginator
 import users
 from django.shortcuts import redirect
 from django.contrib import messages
-
+from .filters import PostFilter
 
 
 #News API
@@ -122,13 +122,20 @@ def filters(request):
         if sponsored_query == 'on':
             qs = qs.filter(sponsored=True)
 
+
+        filtered_post = PostFilter( request.GET, queryset=qs)
+
+        paginated_filtered_posts = Paginator(filtered_post.qs, 5)
+        page_number = request.GET.get('page')
+        post_page_obj = paginated_filtered_posts.get_page(page_number)
         #gotta put here everthing that goes to the html page
         context = {
             'queryset' : qs,
             'schools_all' : schools_all,
             'course_all' : course_all,
             'classes_all' : classes_all,
-            'semester_all': semester_all
+            'semester_all': semester_all,
+            'post_page_obj' : post_page_obj
         }
         return render(request,"main/filters.html", context)
 
