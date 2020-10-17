@@ -29,3 +29,5 @@
 Pagination/filtering solution = https://www.youtube.com/watch?v=dkJ3uqkdCcY , https://simpleisbetterthancomplex.com/snippet/2016/08/22/dealing-with-querystring-parameters.html
 
 Models Reference = https://docs.djangoproject.com/en/3.1/topics/db/models/
+
+select2 =   https://select2.org/configuration/options-api , https://www.youtube.com/watch?v=8VYx-cNF1lU
