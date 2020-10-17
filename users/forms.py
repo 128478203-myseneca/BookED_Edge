@@ -9,6 +9,7 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['school','course','classes','semester','image']
+        
 
 
 class UserRegisterForm(UserCreationForm):
@@ -25,8 +26,6 @@ class UserRegisterForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     
     email = forms.EmailField() #set required=False if you don't want to force the user to input it
-    
-    
 
     class Meta: #gives netet name space for configuration in one place so whenever you save it gonna save to the user model
         model = User
