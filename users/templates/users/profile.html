@@ -138,11 +138,13 @@
       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
       <script>
           $(document).ready(function() {
-              $('#id_school').select2({placeholder: 'Select the school you study at...'});
-              $('#id_course').select2({placeholder: 'Select the course you are currently studying...'});
-              $('#id_classes').select2({placeholder: '(OPTIONAL) Select the class from the course...'});
-              $('#id_semester').select2({placeholder: 'Select the semester you are currently studyin example: 1,2,3...'});
+              $('#id_school').select2({placeholder: 'Select the school you study at...', maximumSelectionLength: 1, maximumInputLength: 10 });
+              $('#id_course').select2({placeholder: 'Select the course you are currently studying...', maximumSelectionLength: 1, maximumInputLength: 10});
+              $('#id_classes').select2({placeholder: '(OPTIONAL) Select the class from the course...', maximumSelectionLength: 1, maximumInputLength: 10});
+              $('#id_semester').select2({placeholder: 'Select the semester you are currently studyin example: 1,2,3...', maximumSelectionLength: 1, maximumInputLength: 10});
           });
+
+          
       </script>
       </body>
 </html>

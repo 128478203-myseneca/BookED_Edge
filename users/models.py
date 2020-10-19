@@ -10,10 +10,10 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) #one to one relationship with the user profile
     image = models.ImageField(default='default.jpg', upload_to='profile_pics') #default profile image
     image_back = models.ImageField(default='default_back.jpg', upload_to='background_pics') #default profile image
-    school = models.ManyToManyField(main.models.School)
-    course = models.ManyToManyField(main.models.Course)
-    classes = models.ManyToManyField(main.models.Class)
-    semester = models.ManyToManyField(main.models.Semester)
+    school = models.ManyToManyField(main.models.School, blank= True)
+    course = models.ManyToManyField(main.models.Course, blank= True)
+    classes = models.ManyToManyField(main.models.Class, blank= True)
+    semester = models.ManyToManyField(main.models.Semester, blank= True)
     
 
     def __str__(self): #if you dont have it the page onlsschools will display "profile object" tunder
@@ -28,6 +28,8 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
 
 
 #note do not forget to make the migrations:
