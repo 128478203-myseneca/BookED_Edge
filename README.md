@@ -31,3 +31,5 @@ Pagination/filtering solution = https://www.youtube.com/watch?v=dkJ3uqkdCcY , ht
 Models Reference = https://docs.djangoproject.com/en/3.1/topics/db/models/
 
 select2 =   https://select2.org/configuration/options-api , https://www.youtube.com/watch?v=8VYx-cNF1lU
+
+filter ajax video = https://www.youtube.com/watch?v=8VYx-cNF1lU&t=1503s
