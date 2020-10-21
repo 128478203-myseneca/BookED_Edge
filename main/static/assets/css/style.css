@@ -11,6 +11,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
+  overflow-x: hidden;
 }
 
 a {
@@ -1741,3 +1742,56 @@ a.article-title:hover {
   z-index: 3;
   position: absolute;
 }
+
+/* footer 2 */
+
+
+
+
+
+
+.image-footer {
+  vertical-align: middle !important;
+  width: 100%;
+  height: auto;
+  width: calc(17px + 6 * ((350vw - 400px) / 680))
+}
+
+
+
+footer {
+  color: #757575 !important
+}
+
+.social {
+  position: relative;
+  left: -10px
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+  color: green;
+  font-weight: bold
+}
+
+/* scroll bar */
+
+::-webkit-scrollbar-track
+{
+	border: 5px solid white;
+  background-color: #b2bec3;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #dfe6e9;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #16df7e;
+	border-radius: 10px;
+}
+
