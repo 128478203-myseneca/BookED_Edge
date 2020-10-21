@@ -31,7 +31,7 @@ class Semester(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=200, default='not declared')
-   # school = models.ForeignKey(School, on_delete=models.CASCADE,null=True, blank=True)
+    school = models.ForeignKey(School, on_delete=models.CASCADE,null=True, blank=True)
  
     class Meta:
         verbose_name_plural = "Courses"

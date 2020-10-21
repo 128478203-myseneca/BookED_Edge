@@ -11,5 +11,6 @@ class PostFilter(django_filters.FilterSet):
         fields = [
             'schools',
             'classes',
-            'course'
+            'course',
+            'semester'
         ]

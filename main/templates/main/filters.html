@@ -102,34 +102,34 @@
             <label for="category">School:</label>
             <select id="category" class="form-control" name="schools" readonly>
               <!-- <option selected>Institution You are Engaged</option> -->
-                {% for school in schools_all %}
-                <option value="{{ school }}">{{ school }}</option>
-                {% endfor %}
+            
+                <option value="{{ schools_all }}">{{ schools_all }}</option>
+              
              </select>
         </div>
         <div class="form-group col-md-4">
           <label for="category">Course:</label>
           <select id="course" class="form-control" name="course" readonly>
              <!-- <option selected>Course You are Engaged</option> -->
-              {% for course in course_all %}
-              <option value="{{ course }}">{{ course }}</option>
-              {% endfor %}
+          
+              <option value="{{ course_all }}">{{ course_all }}</option>
+        
            </select>
       </div>
         <div class="form-group col-md-4">
           <label for="category">Class:</label>
           <select id="classes" class="form-control" name="classes" readonly>
-              {% for class in classes_all %}
-              <option value="{{ class }}">{{ class }}</option>
-              {% endfor %}
+             
+              <option value="{{ classes_all }}">{{ classes_all }}</option>
+  
            </select>
       </div>
           <div class="form-group col-md-2 col-lg-2">
-            <label for="category">Class:</label>
+            <label for="category">Semesters:</label>
             <select id="semester" class="form-control" name="semester" readonly>
-                {% for semesters in semester_all %}
-                <option value="{{ semesters }}">{{ semesters }}</option>
-                {% endfor %}
+               
+                <option value="{{ semester_all }}">{{ semester_all }}</option>
+        
              </select>
           </div>
           <div class="form-group col-md-2 col-lg-2">

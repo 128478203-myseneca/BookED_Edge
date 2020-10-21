@@ -75,10 +75,10 @@ def filters(request):
 
     else:
 
-        schools_all = request.user.profile.school.order_by('name')
-        course_all = request.user.profile.course.order_by('name') 
-        classes_all = request.user.profile.classes.order_by('name')
-        semester_all = request.user.profile.semester.order_by('semester')
+        schools_all = request.user.profile.school
+        course_all = request.user.profile.course
+        classes_all = request.user.profile.classes
+        semester_all = request.user.profile.semester
         #schools_all = School.objects.order_by('name') #alphabetical order
         #course_all = Course.objects.order_by('name') #alphabetical order
         #classes_all = Classes.objects.order_by('name') #alphabetical order

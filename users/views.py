@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required #required to be logged in to see profile page
 from .forms import UserRegisterForm #import the login form for users on forms.py
 from .forms import UserUpdateForm, UserRegisterForm, ProfileUpdateForm
+from main import models
 
 
 
@@ -45,3 +46,9 @@ def profile(request): #command to login user
     }
 
     return render(request, 'users/profile.html', context) #display profile
+
+def load_course(request):
+    school_id = request.GET.get('school_id')
+    courses = models.Course.objects.filter(school_id=school_id)
+    return render(request, 'users/course_dropdown_list_options.html', {'courses': courses})
+    # return JsonResponse(list(cities.values('id', 'name')), safe=False)
