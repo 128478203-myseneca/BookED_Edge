@@ -10,10 +10,10 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) #one to one relationship with the user profile
     image = models.ImageField(default='default.jpg', upload_to='profile_pics') #default profile image
     image_back = models.ImageField(default='default_back.jpg', upload_to='background_pics') #default profile image
-    school = models.ForeignKey(main.models.School, blank= True, on_delete=models.SET_NULL, null=True)
-    course = models.ForeignKey(main.models.Course, blank= True, on_delete=models.CASCADE, null=True)
-    classes = models.ForeignKey(main.models.Class, blank= True, on_delete=models.CASCADE, null=True)
-    semester = models.ForeignKey(main.models.Semester, blank= True, on_delete=models.CASCADE, null=True)
+    school = models.ForeignKey(main.models.School, on_delete=models.CASCADE)
+    course = models.ForeignKey(main.models.Course, blank= True, on_delete=models.SET_NULL, null=True)
+    classes = models.ForeignKey(main.models.Class, blank= True, on_delete=models.SET_NULL, null=True)
+    semester = models.ForeignKey(main.models.Semester, blank= True, on_delete=models.SET_NULL, null=True)
     
 
     def __str__(self): #if you dont have it the page onlsschools will display "profile object" tunder

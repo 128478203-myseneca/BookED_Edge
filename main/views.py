@@ -9,7 +9,7 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView )
-from .models import Post, School, Semester, Course, Book
+from .models import Post, School, Semester, Course
 from .models import Class as Classes
 import datetime as dt
 from django.core.paginator import Paginator
@@ -33,36 +33,6 @@ def home(request):
 def is_calid_queryparam(param):
     return param != '' and param is not None
 
-#testing second filter
-def filters2(request):
-    qs = Book.objects.all()
-    schools_all = School.objects.all()
-    course_all = Course.objects.all()
-    classes_all = Classes.objects.all()
-    schools_query = request.GET.get('schools')
-    semester_query = request.GET.get('semester')
-    classes_query = request.GET.get('classes')
-    course_query = request.GET.get('course')
-
-    if is_calid_queryparam(classes_query) and classes_query != 'Class You are Engaged': #only display books that matches the query
-        qs = qs.filter(classes__name=classes_query) 
-
-    if is_calid_queryparam(course_query) and course_query != 'Course You are Engaged':
-        qs = qs.filter(course__name=course_query) 
-
-    if is_calid_queryparam(schools_query) and schools_query != 'Institution You are Engaged':
-        qs = qs.filter(schools__name=schools_query)
-
-    if is_calid_queryparam(semester_query):
-        qs = qs.filter(semester=semester_query) 
-
-    context = {
-        'queryset2' : qs,
-        'schools_all' : schools_all,
-        'course_all' : course_all,
-        'classes_all' : classes_all,
-    }
-    return render(request,"main/filter2.html", context) # end filter2
 
 #start of filter/find your book
 def filters(request):

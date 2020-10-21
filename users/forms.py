@@ -14,14 +14,21 @@ class ProfileUpdateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['course'].queryset = main.models.Course.objects.none()
 
+   
         if 'school' in self.data:
-            try:
-                school_id = int(self.data.get('school'))
-                self.fields['course'].queryset = main.models.Course.objects.filter(school_id=school_id)
-            except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty City queryset
+            school_id = int(self.data.get('school'))
+            self.fields['course'].queryset = main.models.Course.objects.filter(school_id=school_id).all()
+       
         elif self.instance.pk:
-            self.fields['course'].queryset = self.instance.school.course_set.all()
+            try:
+                self.fields['course'].queryset = self.instance.school.course_set.all()
+            except:
+                pass
+
+        
+
+  
+       
         
 
 

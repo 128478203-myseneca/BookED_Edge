@@ -54,34 +54,7 @@ class Class(models.Model):
 
 
     def __str__(self):
-        return self.name
-
-class Book(models.Model):
-    Title = models.CharField(max_length=30, default='not declared')
-    Author = models.CharField(max_length=30)
-    Publisher = models.CharField(max_length=30)
-    Year = models.DateTimeField(default=timezone.now)
-    classes = models.ManyToManyField(Class)
-    schools = models.ManyToManyField(School)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
-    book_img = models.ImageField(upload_to='books_image',default='default.jpg')
-
-    class Meta:
-        db_table = '5- Books'
-
-    def __str__(self):
-        return self.Title
-
-    def save(self, **kwargs):
-            super().save()
-
-            img = Image.open(self.book_img.path)
-
-            if img.height > 300 or img.width > 300:
-                output_size = (300, 300)
-                img.thumbnail(output_size)
-                img.save(self.book_img.path)
-        
+        return self.name        
 
 
 class Post(models.Model):
