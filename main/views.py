@@ -154,6 +154,7 @@ class PostCreateView(LoginRequiredMixin, CreateView): #sets up form to create ne
     def form_valid(self, form):
         form.instance.author = self.request.user #get users name to put on the post
         return super().form_valid(form)
+        
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): #sets up form to update new post /post/new
     model = Post

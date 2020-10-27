@@ -42,6 +42,7 @@
 
   <!-- ======= Header ======= -->
 
+  <div class="se-pre-con"></div>
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
@@ -519,6 +520,16 @@
   <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
   <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
   <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+  <script>
+ 
+	$(window).load(function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");;
+	});
+  </script>
+
 
   <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
