@@ -77,15 +77,18 @@
           <div class="blog-card alt">
             <div class="meta">
               <div class="photo" style="background-image: url({{post.post_img.url}})"></div>
-              
-                {% if object.author == user %}
-                <a href="{% url 'Post-Update' object.id %}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
-                <a href="{% url 'Post-Delete' object.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Delete</a>
-                {% endif %}
             </div>
+            
             <div class="description">
               <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
               <a class="mr-2" href="{% url 'User-Posts' post.author.username %}">{{ object.author }}</a>
+              {% if object.author == user %}
+              <a href="#" class="btn btn-success btn-sm mt-1 mb-1">Transfer</a>
+              <a href="{% url 'Post-Update' object.id %}" class="btn btn-primary btn-sm mt-1 mb-1">Update</a>
+              <a href="{% url 'Post-Delete' object.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Delete</a>
+              {% else %}
+              <a href="#" class="btn btn-success btn-sm mt-1 mb-1">Buy</a>
+              {% endif %}
               <h1><a href="{% url 'Post-Detail' post.id %}">{{ object.title }}</a></h1>
               <h2>{{ object.date_posted|date:"F d, Y" }}</h2>
               <p>{{ object.content }}</p>
