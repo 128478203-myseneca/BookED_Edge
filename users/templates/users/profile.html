@@ -33,7 +33,8 @@
     <nav class="nav-menu d-none d-lg-block">
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/market">Marketplace</a></li>
+        <li class="active"><a href="/profile">Profile</a></li>
+        <li><a href="/filter">Your Book Selection</a></li>
 
       </ul>
     </nav><!-- .nav-menu -->
@@ -94,6 +95,8 @@
                 <ul class="profile-info-list">
 
                   <a href="/post/{{user.username}}" class="profile-info-list-item"><i class="mdi mdi-bookmark-check"></i>My Posts</a>
+
+                  <a class="profile-info-list-item" href="{% url 'Filter' %}"><i class="mdi mdi-eye"></i>Your Selection</a>
 
                   <a class="profile-info-list-item" href="{% url 'Main-Market' %}"><i class="mdi mdi-eye"></i>Marketplace</a>
 

@@ -37,14 +37,21 @@ def is_calid_queryparam(param):
 #start of filter/find your book
 def filters(request):
 
-    if  request.user.is_anonymous: #return to main page if it is anonymous
+    reque = request.user.profile
+     
+
+    if request.user.is_anonymous: #return to main page if it is anonymous
 
         messages.warning(request, f'Please create a account to use the filter feature !!!') #alert menssage
         return redirect('login')
+    
+    elif reque.semester == None:
+
+        messages.warning(request, f'Please specify the semester in which you are currently studying !!!')
+        return redirect('profile')
        
 
     else:
-
         schools_all = request.user.profile.school
         course_all = request.user.profile.course
         classes_all = request.user.profile.classes
@@ -52,7 +59,7 @@ def filters(request):
         #schools_all = School.objects.order_by('name') #alphabetical order
         #course_all = Course.objects.order_by('name') #alphabetical order
         #classes_all = Classes.objects.order_by('name') #alphabetical order
-        qs = Post.objects.all() #Post.objects.all().order_by('-date_posted')
+        qs = Post.objects.filter(visible=True) #Post.objects.all().order_by('-date_posted')
         title_contains_query = request.GET.get('title_contains')
         isbn_query = request.GET.get('title_or_author')
         semester_query = request.GET.get('semester')
@@ -95,7 +102,7 @@ def filters(request):
 
         filtered_post = PostFilter( request.GET, queryset=qs)
 
-        paginated_filtered_posts = Paginator(filtered_post.qs, 5)
+        paginated_filtered_posts = Paginator(filtered_post.qs, 4)
         page_number = request.GET.get('page')
         post_page_obj = paginated_filtered_posts.get_page(page_number)
         #gotta put here everthing that goes to the html page
@@ -112,6 +119,7 @@ def filters(request):
 #logic for marketplace view and ordering of posts
 class PostListView(ListView):
     model = Post
+    queryset = Post.objects.filter(visible=True)
     template_name = 'main/market.html' # <app>/<models>_<viewtype>.html <APP>
     context_object_name = 'posts' #<MODELS>
     ordering =  ['-date_posted']
@@ -149,23 +157,36 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class PostCreateView(LoginRequiredMixin, CreateView): #sets up form to create new post /post/new
     model = Post
-    fields=['title','content','schools','semester','isbn','post_img','course','classes'] 
+    fields=['title','content','schools','semester','isbn','post_img','course','classes','visible'] 
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user #get users name to put on the post
+        return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): #sets up form to update new post /post/new
+    model = Post
+    fields=['title','content','schools','semester','isbn','post_img','course','classes','visible'] 
 
     def form_valid(self, form):
         form.instance.author = self.request.user #get users name to put on the post
         return super().form_valid(form)
         
-
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): #sets up form to update new post /post/new
-    model = Post
-    fields=['title','content','schools','semester','isbn','post_img','course','classes'] 
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user #get users name to put on the post
-        return super().form_valid(form)
-
+        
     def test_func(self): #blocks user from editing posts that are not theirs
         post = self.get_object()
-        if self.request.user == post.author:
-            return True  
-        return False
+        if self.request.user.is_anonymous:
+            return redirect('login')
+        else:
+            if self.request.user == post.author:
+                return True  
+            elif self.request.user != post.author:
+                return True 
+                
+                
+
+               
+                
+                
+
+                

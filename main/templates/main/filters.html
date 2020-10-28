@@ -59,7 +59,8 @@
 
     <main role="main" class="container">
       
-      <h3>Hello {{user.username}} this is your book selection:</h3>
+      <h3>Hello {{user.username}} this is your book selection...</h3>
+      <p>Click on <a style="color: rgb(20, 156, 145);" href="#search">Search</a><a> to get the best books available for you or go to <a style="color: rgb(20, 156, 145);" href="{% url 'profile' %}">Profile</a> to adjust the filter !!!</p>
       <form method="GET" action=".">
         <label for="category">Title:</label>
         <div class="form-row">
@@ -114,7 +115,7 @@
         
            </select>
       </div>
-        <div class="form-group col-md-4">
+        <div id="search"  class="form-group col-md-4">
           <label for="category">Class:</label>
           <select id="classes" class="form-control" name="classes" readonly>
              

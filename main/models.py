@@ -61,8 +61,8 @@ class Post(models.Model):
     title = models.CharField(max_length=50) #title length restriction 50
     content = models.TextField(max_length=500) #content lenght restricted to 500
     schools = models.ForeignKey('School', null=True, blank=True, on_delete=models.CASCADE)
-    classes = models.ManyToManyField(Class)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+    classes = models.ManyToManyField(Class)
     date_posted = models.DateTimeField(default=timezone.now) #gets time that the post is made
     semester = models.ForeignKey('Semester', null=True, blank=True, on_delete=models.CASCADE)
     objects = models.Manager()
@@ -70,6 +70,7 @@ class Post(models.Model):
     post_img = models.ImageField(upload_to='post_image',default='default.jpg')
     author = models.ForeignKey(User, on_delete=models.CASCADE) #deleted post if user is deleted
     sponsored = models.BooleanField(default=False)
+    visible = models.BooleanField(default=False)
  
     def __str__(self):
         return self.title
