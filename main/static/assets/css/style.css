@@ -1457,8 +1457,8 @@ a.article-title:hover {
 .login-wrap{
 	width:100%;
 	margin:auto;
-	max-width:525px;
-	min-height:1000px;
+	max-width:550px;
+	min-height:1080px;
 	position:relative;
 	background:url(https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/07/02/10/old-book.jpg) no-repeat center;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
@@ -1806,4 +1806,14 @@ footer {
 	height: 100%;
 	z-index: 9999;
 	background: url(../img/BookED_Logo1.png) center no-repeat #fff;
+}
+
+textarea {
+  border-radius: 8px;
+  resize: none;
+}
+
+input {
+  border-radius: 5px ;
+
 }

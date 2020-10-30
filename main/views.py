@@ -17,6 +17,7 @@ import users
 from django.shortcuts import redirect
 from django.contrib import messages
 from .filters import PostFilter
+from .forms import PostCreateForm
 
 
 #News API
@@ -37,15 +38,13 @@ def is_calid_queryparam(param):
 #start of filter/find your book
 def filters(request):
 
-    reque = request.user.profile
      
-
-    if request.user.is_anonymous: #return to main page if it is anonymous
+    if not request.user.is_authenticated: #return to main page if it is anonymous
 
         messages.warning(request, f'Please create a account to use the filter feature !!!') #alert menssage
         return redirect('login')
     
-    elif reque.semester == None:
+    elif request.user.profile.semester == None:
 
         messages.warning(request, f'Please specify the semester in which you are currently studying !!!')
         return redirect('profile')
@@ -156,15 +155,17 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         
 
 class PostCreateView(LoginRequiredMixin, CreateView): #sets up form to create new post /post/new
-    model = Post
-    fields=['title','content','schools','semester','isbn','post_img','course','classes','visible'] 
+
+    form_class =  PostCreateForm
+    template_name = 'main/post_form.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user #get users name to put on the post
         return super().form_valid(form)
+    
 
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): #sets up form to update new post /post/new
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): 
     model = Post
     fields=['title','content','schools','semester','isbn','post_img','course','classes','visible'] 
 
@@ -182,11 +183,4 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): #sets
                 return True  
             elif self.request.user != post.author:
                 return True 
-                
-                
 
-               
-                
-                
-
-                

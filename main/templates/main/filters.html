@@ -12,6 +12,7 @@
     <link href="{% static 'assets/img/BookED_Logo1.png' %}" rel="icon">
     <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  <!-- icons posts -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'assets/css/filter.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
@@ -34,9 +35,9 @@
    
          <nav class="nav-menu d-none d-lg-block">
            <ul>
-             <li><a href="/">Home</a></li>
-             <li><a href="/market">Marketplace</a></li>
-             <li class="active"><a href="/filter">Find Your Book</a></li>
+             <li><a href="{% url 'Main-Home' %}">Home</a></li>
+             <li><a href="{% url 'Main-Market' %}">Marketplace</a></li>
+             <li class="active"><a href="{% url 'Filter' %}">Find Your Book</a></li>
    
            </ul>
          </nav>

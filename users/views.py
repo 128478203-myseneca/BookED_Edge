@@ -51,4 +51,4 @@ def load_course(request):
     school_id = request.GET.get('school_id')
     courses = models.Course.objects.filter(school_id=school_id)
     return render(request, 'users/course_dropdown_list_options.html', {'courses': courses})
-    # return JsonResponse(list(cities.values('id', 'name')), safe=False)
+   

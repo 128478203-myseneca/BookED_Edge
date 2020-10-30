@@ -16,12 +16,6 @@
   <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
  
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-
- 
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
   <link href="{% static 'assets/css/filter.css' %}" rel="stylesheet">
 
@@ -93,9 +87,10 @@
               <h1><a href="{% url 'Post-Detail' post.id %}">{{ object.title }}</a></h1>
               <h2>{{ object.date_posted|date:"F d, Y" }}</h2>
               <p>{{ object.content }}</p>
-              <p>School : {{  object.schools }}</p>
-              <p>Semester : {{  object.semester }}</p>
-              <p>ISBN Number : {{  object.isbn }}</p>
+              <p  style="float: right; clear: both;"><b>School :</b> {{  object.schools }}</p>
+              <p  style="float: right; clear: both;"><b>Semester :</b> {{  object.semester }}</p>
+              <p  style="float: right; clear: both;"><b>ISBN Number :</b> {{  object.isbn }}</p>
+             
             </div>
           </div>
             <br>
@@ -112,8 +107,7 @@
   <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
   <script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
   <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+
 
 
   <script src="{% static 'assets/js/main.js' %}"></script>

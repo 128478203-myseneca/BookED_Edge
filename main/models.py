@@ -45,8 +45,7 @@ class Course(models.Model):
 
 class Class(models.Model):
     name = models.CharField(max_length=200, default='not declared' )
-   # course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
-   # semester = models.ManyToManyField(Semester)
+
     
     class Meta:
         verbose_name_plural = "Classes"
@@ -58,12 +57,12 @@ class Class(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=50) #title length restriction 50
-    content = models.TextField(max_length=500) #content lenght restricted to 500
+    title = models.CharField(max_length=50) 
+    content = models.TextField(max_length=500) 
     schools = models.ForeignKey('School', null=True, blank=True, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
     classes = models.ManyToManyField(Class)
-    date_posted = models.DateTimeField(default=timezone.now) #gets time that the post is made
+    date_posted = models.DateTimeField(default=timezone.now) 
     semester = models.ForeignKey('Semester', null=True, blank=True, on_delete=models.CASCADE)
     objects = models.Manager()
     isbn = models.IntegerField(default=000)
