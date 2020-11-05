@@ -1,23 +1,25 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from newsapi import NewsApiClient
+import users 
+import datetime as dt #extra
+from newsapi import NewsApiClient  #extra
+from .models import Post, School, Semester, Course, Report_User
+from .models import Class as Classes  #change name because of compatibility
+from .filters import PostFilter
+from .forms import PostCreateForm
+from django.shortcuts import render, redirect, get_object_or_404 #404 page display, redirect if a action happends, render page
 from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin #forces user to login before it has access to certain pages, or edit posts
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin #auth required
+from django.contrib.messages.views import SuccessMessageMixin #alerts pop up
+from django.contrib import messages #alerts pop up
+from django.core.paginator import Paginator #email
+from django.core.mail import send_mail #email
+from django.conf import settings #email
 from django.views.generic import (
     ListView, 
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView )
-from .models import Post, School, Semester, Course
-from .models import Class as Classes
-import datetime as dt
-from django.core.paginator import Paginator
-import users
-from django.shortcuts import redirect
-from django.contrib import messages
-from .filters import PostFilter
-from .forms import PostCreateForm
+    DeleteView ) #logic of post 
+
 
 
 #News API
@@ -155,25 +157,32 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         
 
 class PostCreateView(LoginRequiredMixin, CreateView): #sets up form to create new post /post/new
-
-    form_class =  PostCreateForm
+    form_class = PostCreateForm 
     template_name = 'main/post_form.html'
 
     def form_valid(self, form):
+        user_email = self.request.user.email #get user email, and send email confirming post if valid
+        send_mail('You post has been created succesfuly !!!',
+        'You post has been created succesfuly !!!',
+        'booked.reset@gmail.com',
+        [user_email],
+        fail_silently=False) 
+
         form.instance.author = self.request.user #get users name to put on the post
         return super().form_valid(form)
-    
+
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): 
     model = Post
-    fields=['title','content','schools','semester','isbn','post_img','course','classes','visible'] 
+    fields=['title','content','schools','semester','isbn','post_img','course','classes','visible','author'] 
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user #get users name to put on the post
-        return super().form_valid(form)
-        
-        
+    #def form_valid(self, form):
+    # form.instance.author =  form.author   #self.request.user #get users name to put on the post  
+       # return super().form_valid(form)
+       # form.instance.author =  form.author   #self.request.user #get users name to put on the post  
+
+
     def test_func(self): #blocks user from editing posts that are not theirs
         post = self.get_object()
         if self.request.user.is_anonymous:
@@ -182,5 +191,17 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             if self.request.user == post.author:
                 return True  
             elif self.request.user != post.author:
-                return True 
+                return False
+              
+class ReportCreateView(SuccessMessageMixin,LoginRequiredMixin, CreateView): #sets up form to create new post /post/new
+    model = Report_User
+    template_name = 'main/report_user_form.html'
+    fields=['short_explanation','reported','content']
+    success_message = "Report Has been Forwarded to a Admin, thanks for making BookED a better place !!!"
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user #get users name to put on the post
+        return super().form_valid(form)
+
+
 

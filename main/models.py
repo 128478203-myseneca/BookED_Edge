@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
 from django.core.paginator import Paginator
-
+from dirtyfields import DirtyFieldsMixin
 
 class School(models.Model):
     name = models.CharField(max_length=200, default='not declared', null=True, blank=True)
@@ -56,7 +56,7 @@ class Class(models.Model):
         return self.name        
 
 
-class Post(models.Model):
+class Post(DirtyFieldsMixin, models.Model):
     title = models.CharField(max_length=50) 
     content = models.TextField(max_length=500) 
     schools = models.ForeignKey('School', null=True, blank=True, on_delete=models.CASCADE)
@@ -70,6 +70,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE) #deleted post if user is deleted
     sponsored = models.BooleanField(default=False)
     visible = models.BooleanField(default=False)
+    
  
     def __str__(self):
         return self.title
@@ -90,3 +91,19 @@ class Post(models.Model):
     class Meta:
         ordering = ['-date_posted']
 
+class Report_User(models.Model):
+    short_explanation = models.CharField(max_length=30) 
+    reported =  models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE,related_name='Users', null=True, blank=True)
+    content= models.TextField(max_length=500)
+    date_posted = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.short_explanation
+
+    def get_absolute_url(self):
+        return reverse('Main-Home') #when person creates post redirects itself to the created post after submitted
+
+    class Meta:
+        verbose_name_plural = "UserReports"
+        ordering = ['-date_posted']

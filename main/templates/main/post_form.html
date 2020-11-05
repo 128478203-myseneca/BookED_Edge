@@ -80,6 +80,12 @@
             <label for="pass" class="label">Visible</label>
             {{ form.visible }}
           </div>
+          {% if user.is_authenticated and user == post.author %}
+          <div class="group" id="author">
+            <label style="color: rgb(163, 19, 19);" for="pass" class="label">Change Ownership of Post (IRREVERSIBLE)</label>
+            {{ form.author }}
+          </div>
+          {% endif %}
           <div class="group">
             <button class="button" type="submit">Post</button>
           </div>
@@ -96,6 +102,7 @@
               $('#id_course').select2({placeholder: 'Select the course you are currently studying...', maximumSelectionLength: 2, maximumInputLength: 7});
               $('#id_classes').select2({placeholder: 'Select the class from the course...', maximumSelectionLength: 2, maximumInputLength: 7});
               $('#id_semester').select2({placeholder: 'Select the semester you are currently studyin example: 1,2,3...', maximumSelectionLength: 2, maximumInputLength: 7});
+              $('#id_author').select2({placeholder: 'Change Ownership...', maximumSelectionLength: 2, maximumInputLength: 10});
           });  
 </script>
 </html>

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView
+from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView,  ReportCreateView
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -15,7 +15,8 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='Post-Delete'), 
     path('post/new/', PostCreateView.as_view(), name='Post-Create'), 
     path('market/', PostListView.as_view(), name='Main-Market'),
-   
+    path('report_user/new/',  ReportCreateView.as_view(), name='Report-User'),
+
 ]
 
 if settings.DEBUG:
