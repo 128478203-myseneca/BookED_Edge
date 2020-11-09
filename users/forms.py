@@ -9,6 +9,26 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['school','course','classes','semester','image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['course'].queryset = main.models.Course.objects.none()
+
+   
+        if 'school' in self.data:
+            school_id = int(self.data.get('school'))
+            self.fields['course'].queryset = main.models.Course.objects.filter(school_id=school_id).all()
+       
+        elif self.instance.pk:
+            try:
+                self.fields['course'].queryset = self.instance.school.course_set.all()
+            except:
+                pass
+
+        
+
+  
+       
         
 
 

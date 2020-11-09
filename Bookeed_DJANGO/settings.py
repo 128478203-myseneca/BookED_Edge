@@ -155,5 +155,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'booked.reset@gmail.com'
-EMAIL_HOST_PASSWORD = 'gwdwhqgmmikmylou'
+EMAIL_HOST_PASSWORD = 'uwppxwumolicojaq'
 

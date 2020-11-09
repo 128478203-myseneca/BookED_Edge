@@ -12,6 +12,7 @@
     <link href="{% static 'assets/img/BookED_Logo1.png' %}" rel="icon">
     <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  <!-- icons posts -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'assets/css/filter.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
@@ -28,17 +29,15 @@
      {% endif %}
    </div>
    
-   
-   
      <header id="header" class="fixed-top">
        <div class="container d-flex align-items-center">
          <a href="/"><img src="{% static 'assets/img/BookED_Logo1.png' %}" alt="MainLogo" class="img-fluid" width="100" height="100"></a>
    
          <nav class="nav-menu d-none d-lg-block">
            <ul>
-             <li><a href="/">Home</a></li>
-             <li><a href="/market">Marketplace</a></li>
-             <li class="active"><a href="/filter">Find Your Book</a></li>
+             <li><a href="{% url 'Main-Home' %}">Home</a></li>
+             <li><a href="{% url 'Main-Market' %}">Marketplace</a></li>
+             <li class="active"><a href="{% url 'Filter' %}">Find Your Book</a></li>
    
            </ul>
          </nav>
@@ -61,7 +60,8 @@
 
     <main role="main" class="container">
       
-      <h3>Filter Books</h3>
+      <h3>Hello {{user.username}} this is your book selection...</h3>
+      <p>Click on <a style="color: rgb(20, 156, 145);" href="#search">Search</a><a> to get the best books available for you or go to <a style="color: rgb(20, 156, 145);" href="{% url 'profile' %}">Profile</a> to adjust the filter !!!</p>
       <form method="GET" action=".">
         <label for="category">Title:</label>
         <div class="form-row">
@@ -102,34 +102,34 @@
             <label for="category">School:</label>
             <select id="category" class="form-control" name="schools" readonly>
               <!-- <option selected>Institution You are Engaged</option> -->
-                {% for school in schools_all %}
-                <option value="{{ school }}">{{ school }}</option>
-                {% endfor %}
+            
+                <option value="{{ schools_all }}">{{ schools_all }}</option>
+              
              </select>
         </div>
         <div class="form-group col-md-4">
           <label for="category">Course:</label>
           <select id="course" class="form-control" name="course" readonly>
              <!-- <option selected>Course You are Engaged</option> -->
-              {% for course in course_all %}
-              <option value="{{ course }}">{{ course }}</option>
-              {% endfor %}
+          
+              <option value="{{ course_all }}">{{ course_all }}</option>
+        
            </select>
       </div>
-        <div class="form-group col-md-4">
+        <div id="search"  class="form-group col-md-4">
           <label for="category">Class:</label>
           <select id="classes" class="form-control" name="classes" readonly>
-              {% for class in classes_all %}
-              <option value="{{ class }}">{{ class }}</option>
-              {% endfor %}
+             
+              <option value="{{ classes_all }}">{{ classes_all }}</option>
+  
            </select>
       </div>
           <div class="form-group col-md-2 col-lg-2">
-            <label for="category">Class:</label>
+            <label for="category">Semesters:</label>
             <select id="semester" class="form-control" name="semester" readonly>
-                {% for semesters in semester_all %}
-                <option value="{{ semesters }}">{{ semesters }}</option>
-                {% endfor %}
+               
+                <option value="{{ semester_all }}">{{ semester_all }}</option>
+        
              </select>
           </div>
           <div class="form-group col-md-2 col-lg-2">
@@ -179,7 +179,7 @@
                 <a class="mr-2" href="{% url 'User-Posts' post.author.username %}">{{ post.author }}</a>
                 <h1><a href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h1>
                 <h2>{{ post.date_posted|date:"F d, Y" }}</h2>
-                <p>{{ post.content|truncatewords:50 }}</p>
+                <p>{{ post.content|truncatewords:25 }}</p>
                 <p class="read-more">
                   <a href="{% url 'User-Posts' post.author.username %}">Read More...</a>
                 </p>
@@ -203,6 +203,52 @@
   
 
     </main>
+
+    <footer id="footer">
+
+      <footer>
+        <div class="row justify-content-around mb-0 pt-5 pb-0 ">
+            <div class=" col-11">
+                <div class="row justify-content-center">
+                    <div class="col-md-3 col-12 font-italic align-items-center mt-md-3 mt-4">
+                        <h5><span> <img class="image-footer"  src="{% static 'assets/img/BookED_Logo1.png' %}" class="img-fluid mb-1 "></span><b class="text-dark"> Book<span style="color: green;"> ED</span></b></h5>
+                        <p class="social mt-md-3 mt-2"> <span><i class="fa fa-facebook " aria-hidden="true"></i></span> <span><i class="fa fa-linkedin" aria-hidden="true"></i></span> <span><i class="fa fa-twitter" aria-hidden="true"></i></span> </p> <small class="copy-rights cursor-pointer">&#9400; 2020 BookED Ltda</small><br> <small>Copyright. All Rights Reserved. </small>
+                    </div>
+                    <div class="col-md-3 col-12 my-sm-0 mt-5">
+                        <ul class="list-unstyled">
+                            <li class="mt-md-3 mt-4">Our Solution</li>
+                            <li>Intergrated Security Platform</li>
+                            <li>Core Features</li>
+                            <li>Product Features</li>
+                            <li>Pricing</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-12 my-sm-0 mt-5">
+                        <ul class="list-unstyled">
+                            <li class="mt-md-3 mt-4">Your needs</li>
+                            <li>Intergrated Security Platform</li>
+                            <li>Core Features</li>
+                            <li>Product Features</li>
+                            <li>Pricing</li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-auto col-md-3 col-12 my-sm-0 mt-5">
+                        <ul class="list-unstyled">
+                            <li class="mt-md-3 mt-4">Offer</li>
+                            <li>Intergrated Security Platform</li>
+                            <li>Core Features</li>
+                            <li>Product Features</li>
+                            <li>Pricing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+
+    </footer><!-- End Footer -->
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

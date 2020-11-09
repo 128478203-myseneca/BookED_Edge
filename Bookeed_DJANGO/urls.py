@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views  #login/logout forms
 from django.urls import path, include
 from users import views as user_views #register forms
+import users
 
 
 
@@ -18,7 +19,8 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
     path('', include('main.urls')),
-     path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('ajax/load-course/', users.views.load_course , name='ajax_load_course')
 ]
 
 if settings.DEBUG:

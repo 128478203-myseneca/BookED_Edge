@@ -3,6 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required #required to be logged in to see profile page
 from .forms import UserRegisterForm #import the login form for users on forms.py
 from .forms import UserUpdateForm, UserRegisterForm, ProfileUpdateForm
+from main import models
+from django.core.paginator import Paginator #email
+from django.core.mail import send_mail #email
+from django.conf import settings #email
 
 
 
@@ -15,6 +19,12 @@ def register(request):  #command to register the user to the database
             form.save() #save credentials if valid
             username = form.cleaned_data.get('username') #get username 
             messages.success(request, f'Welcome {username} your account has just been created ! Please log in back to select the institution you study at :)') #alert menssage
+            user_email = form.cleaned_data.get('email') #get user email, and send email confirming post if valid
+            send_mail(f'Welcome to BookED {username} !!!',
+            'You post has been created succesfuly !!!',
+            'booked.reset@gmail.com',
+            [user_email],
+            fail_silently=False) 
             return redirect('login') #redirect to main page
     else:
         form = UserRegisterForm()
@@ -45,3 +55,9 @@ def profile(request): #command to login user
     }
 
     return render(request, 'users/profile.html', context) #display profile
+
+def load_course(request):
+    school_id = request.GET.get('school_id')
+    courses = models.Course.objects.filter(school_id=school_id)
+    return render(request, 'users/course_dropdown_list_options.html', {'courses': courses})
+   

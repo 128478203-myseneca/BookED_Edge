@@ -15,11 +15,13 @@
   <link href="{% static  'assets/img/BookED_Logo1.png'  %}" rel="icon">
   <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+  
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  
 
 </head>
 
@@ -38,7 +40,6 @@
   <div class="login-wrap">
     <div class="login-html">
       <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Create Post</label>
-      
       <div class="login-form">
         <div class="sign-in-htm">
           <div class="group">
@@ -76,6 +77,16 @@
             {{ form.post_img }}
           </div>
           <div class="group">
+            <label for="pass" class="label">Visible</label>
+            {{ form.visible }}
+          </div>
+          {% if user.is_authenticated and user == post.author %}
+          <div class="group" id="author">
+            <label style="color: rgb(163, 19, 19);" for="pass" class="label">Change Ownership of Post (IRREVERSIBLE)</label>
+            {{ form.author }}
+          </div>
+          {% endif %}
+          <div class="group">
             <button class="button" type="submit">Post</button>
           </div>
         </div>
@@ -83,4 +94,15 @@
   
 
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+              $('#id_schools').select2({placeholder: 'Select the school you study at...', maximumSelectionLength: 2, maximumInputLength: 7 });
+              $('#id_course').select2({placeholder: 'Select the course you are currently studying...', maximumSelectionLength: 2, maximumInputLength: 7});
+              $('#id_classes').select2({placeholder: 'Select the class from the course...', maximumSelectionLength: 2, maximumInputLength: 7});
+              $('#id_semester').select2({placeholder: 'Select the semester you are currently studyin example: 1,2,3...', maximumSelectionLength: 2, maximumInputLength: 7});
+              $('#id_author').select2({placeholder: 'Change Ownership...', maximumSelectionLength: 2, maximumInputLength: 10});
+          });  
+</script>
 </html>
