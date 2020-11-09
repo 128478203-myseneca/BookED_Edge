@@ -179,7 +179,7 @@
                 <a class="mr-2" href="{% url 'User-Posts' post.author.username %}">{{ post.author }}</a>
                 <h1><a href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h1>
                 <h2>{{ post.date_posted|date:"F d, Y" }}</h2>
-                <p>{{ post.content|truncatewords:50 }}</p>
+                <p>{{ post.content|truncatewords:25 }}</p>
                 <p class="read-more">
                   <a href="{% url 'User-Posts' post.author.username %}">Read More...</a>
                 </p>

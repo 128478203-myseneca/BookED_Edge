@@ -13,6 +13,9 @@ from django.contrib import messages #alerts pop up
 from django.core.paginator import Paginator #email
 from django.core.mail import send_mail #email
 from django.conf import settings #email
+from django.http import HttpResponseRedirect
+from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, 
     DetailView,
@@ -173,10 +176,9 @@ class PostCreateView(LoginRequiredMixin, CreateView): #sets up form to create ne
 
 
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): 
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView, HttpResponseRedirect): 
     model = Post
     fields=['title','content','schools','semester','isbn','post_img','course','classes','visible','author'] 
-
     #def form_valid(self, form):
     # form.instance.author =  form.author   #self.request.user #get users name to put on the post  
        # return super().form_valid(form)
@@ -191,7 +193,27 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             if self.request.user == post.author:
                 return True  
             elif self.request.user != post.author:
-                return False
+                username = self.request.user #get username 
+                user_email = post.author.email #get user email, and send email confirming post if valid
+                user_buy_email = self.request.user.email
+                send_mail(f'{username} wants to buy your book !!!',
+                f'I want to buy your book !!!, my email contact his {user_buy_email}',
+                'booked.reset@gmail.com',
+                [user_email],
+                fail_silently=False)
+               
+    def handle_no_permission(self):
+        return redirect('profile') #FIX THIS
+                
+                
+
+              
+                
+
+       
+        
+                
+                
               
 class ReportCreateView(SuccessMessageMixin,LoginRequiredMixin, CreateView): #sets up form to create new post /post/new
     model = Report_User
