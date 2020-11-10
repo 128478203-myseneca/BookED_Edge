@@ -9,7 +9,7 @@
 <title>Book ED - Home Page</title>
   
   
-  <meta content="" name="descriptison">
+  <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
@@ -81,12 +81,12 @@
       
 
       {% if user.is_authenticated %}
-      <a href="/profile" class="get-started-btn scrollto">Profile</a>
+      <a href="{% url 'profile' %}" class="get-started-btn scrollto">Profile</a>
       <a href="{% url 'Post-Create' %}" class="get-post-btn scrollto">New Post</a>
 
       {% else %}
-      <a href="/login" class="get-started-btn scrollto">Login</a>
-      <a href="/register" class="get-register-btn scrollto">Register</a>
+      <a href="{% url 'login' %}" class="get-started-btn scrollto">Login</a>
+      <a href="{% url 'register' %}" class="get-register-btn scrollto">Register</a>
       {% endif %}
       
     </ul>
@@ -124,8 +124,8 @@
 
 
     <!-- ======= Services Section ======= -->
-    <section id="faqs" class="services section-bg">
-      <div class="container">
+    <section class="services section-bg">
+      <div class="container"><a id="faqs"></a>
 
         <div class="section-title">
           <span>FAQs</span>
@@ -459,30 +459,40 @@
               <div class="row justify-content-center">
                   <div class="col-md-3 col-12 font-italic align-items-center mt-md-3 mt-4">
                       <h5><span> <img class="image-footer"  src="{% static 'assets/img/BookED_Logo1.png' %}" class="img-fluid mb-1 "></span><b class="text-dark"> Book<span style="color: green;"> ED</span></b></h5>
-                      <p class="social mt-md-3 mt-2"> <span><i class="fa fa-facebook " aria-hidden="true"></i></span> <span><i class="fa fa-linkedin" aria-hidden="true"></i></span> <span><i class="fa fa-twitter" aria-hidden="true"></i></span> </p> <small class="copy-rights cursor-pointer">&#9400; 2020 BookED Ltda</small><br> <small>Copyright. All Rights Reserved. </small>
+                      <div class="footer-top">
+
+                        <div class="social-links" style="margin-left: 15px;">
+                          <a href="#" class="twitter"><i class="bx bxl-twitter  bx-sm"></i></a>
+                          <a href="#" class="facebook"><i class="bx bxl-facebook  bx-sm"></i></a>
+                          <a href="#" class="instagram"><i class="bx bxl-instagram  bx-sm"></i></a>
+                          <a href="#" class="linkedin"><i class="bx bxl-linkedin  bx-sm"></i></a>
+                        </div>
+                  
+                      </div>
                   </div>
                   <div class="col-md-3 col-12 my-sm-0 mt-5">
                       <ul class="list-unstyled">
-                          <li class="mt-md-3 mt-4">Our Solution</li>
-                          <li>Intergrated Security Platform</li>
-                          <li>Core Features</li>
-                          <li>Product Features</li>
-                          <li>Pricing</li>
+                          <li class="mt-md-3 mt-4" style="font-weight: bolder;">Home</li>
+                          <li>Your Book Selection</li>
+                          <li>FAQs</li>
+                          <li>About</li>
+                          <li>Team</li>
+                          <li>Contact</li>
                       </ul>
                   </div>
                   <div class="col-md-3 col-12 my-sm-0 mt-5">
                       <ul class="list-unstyled">
-                          <li class="mt-md-3 mt-4">Your needs</li>
-                          <li>Intergrated Security Platform</li>
-                          <li>Core Features</li>
-                          <li>Product Features</li>
-                          <li>Pricing</li>
+                          <li class="mt-md-3 mt-4" style="font-weight: bolder;">Seeking for help ?</li>
+                          <li>Our Contect</li>
+                          <li>Forum</li>
+                          <li>Discord</li>
+                          <li>Social Medias</li>
                       </ul>
                   </div>
                   <div class="col-xl-auto col-md-3 col-12 my-sm-0 mt-5">
                       <ul class="list-unstyled">
-                          <li class="mt-md-3 mt-4">Offer</li>
-                          <li>Intergrated Security Platform</li>
+                          <li class="mt-md-3 mt-4" style="font-weight: bolder;">Special Offers</li>
+                          <li>Intergrated Security Platfors</li>
                           <li>Core Features</li>
                           <li>Product Features</li>
                           <li>Pricing</li>
@@ -492,18 +502,6 @@
           </div>
       </div>
 </div>
-<center>
-    <div class="footer-top">
-
-        <div class="social-links">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-
-      </div>
     </div>
   </footer><!-- End Footer -->
 

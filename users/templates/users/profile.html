@@ -8,7 +8,7 @@
 
   <title>Book ED - Profile</title>
 
-  <meta content="" name="descriptison">
+  <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
@@ -43,7 +43,7 @@
     <a href="{% url 'logout' %}" class="get-logout-btn scrollto">Logout</a>
     {% else %}
     <a href="{% url 'login' %}" class="get-started-btn scrollto">Login</a>
-    <a href="/register" class="get-register-btn scrollto">Register</a>
+    <a href="{% url 'register' %}" class="get-register-btn scrollto">Register</a>
     {% endif %}
 
   </div>

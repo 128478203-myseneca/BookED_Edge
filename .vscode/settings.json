@@ -1,3 +1,12 @@
 {
-    "python.pythonPath": "C:\\Python39\\python.exe"
+    "python.pythonPath": "C:\\Python39\\python.exe",
+    "cSpell.ignoreWords": [
+        "allauth",
+        "dirtyfields",
+        "newsapi",
+        "venv",
+        "virtualenv"
+    ],
+    "python.formatting.provider": "black",
+    "git.ignoreLimitWarning": true
 }

@@ -8,7 +8,7 @@
 
   <title>Book ED - Post Form</title>
 
-  <meta content="" name="descriptison">
+  <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
@@ -45,7 +45,7 @@
           <div class="group">
             <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="user" class="label">Title</label>
+            <label for="user" class="label" >Title</label>
             {{  form.title }}
           </div>
           <div class="group">
@@ -87,6 +87,10 @@
           </div>
           {% endif %}
           <div class="group">
+            <label for="pass" class="label">Robot is that you ?! 🤔 </label>
+            {{ form.captcha }}
+          </div>
+          <div class="group">
             <button class="button" type="submit">Post</button>
           </div>
         </div>
@@ -100,8 +104,8 @@
     $(document).ready(function() {
               $('#id_schools').select2({placeholder: 'Select the school you study at...', maximumSelectionLength: 2, maximumInputLength: 7 });
               $('#id_course').select2({placeholder: 'Select the course you are currently studying...', maximumSelectionLength: 2, maximumInputLength: 7});
-              $('#id_classes').select2({placeholder: 'Select the class from the course...', maximumSelectionLength: 2, maximumInputLength: 7});
-              $('#id_semester').select2({placeholder: 'Select the semester you are currently studyin example: 1,2,3...', maximumSelectionLength: 2, maximumInputLength: 7});
+              $('#id_classes').select2({placeholder: 'Select the class from the course...', maximumSelectionLength: 1, maximumInputLength: 7});
+              $('#id_semester').select2({placeholder: 'Select the semester you are currently studying example: 1,2,3...', maximumSelectionLength: 2, maximumInputLength: 7});
               $('#id_author').select2({placeholder: 'Change Ownership...', maximumSelectionLength: 2, maximumInputLength: 10});
           });  
 </script>
