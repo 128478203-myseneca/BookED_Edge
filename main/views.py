@@ -32,6 +32,7 @@ from django.views.generic import (
 )  # logic of post
 
 
+
 # News API
 newsapi = NewsApiClient("c368efff5ae140c896773ec0e2dcae10")
 data = newsapi.get_everything(

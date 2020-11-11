@@ -9,6 +9,7 @@ from main import models
 from django.core.paginator import Paginator  # email
 from django.core.mail import send_mail  # email
 from django.conf import settings  # email
+from django.template.loader import render_to_string
 
 
 # views render logic for the routes
@@ -22,24 +23,20 @@ def register(request):  # command to register the user to the database
             username = form.cleaned_data.get("username")  # get username
             messages.success(
                 request,
-                f"Welcome {username} your account has just been created, a email has been send to you ! Please log in back to select the institution you study at :)",
+                f"Welcome {username} your account has just been created ! Please log in back to select the institution you study at :)",
             )  # alert menssage
             user_email = form.cleaned_data.get(
                 "email"
             )  # get user email, and send email confirming post if valid
+            template = render_to_string("users/email_template.html", {"name": username})
             send_mail(
                 f"Welcome to BookED {username} !!!",
-                "Now you can put your books on sale and search for used ones by using our filter!!!",
+                template,
                 "booked.reset@gmail.com",
                 [user_email],
                 fail_silently=False,
             )
             return redirect("login")  # redirect to main page
-        else:
-            messages.info(
-                request,
-                f"Credentials are not valid",
-            )  # alert menssage
     else:
         form = UserRegisterForm()
     return render(

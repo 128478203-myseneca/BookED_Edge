@@ -80,16 +80,15 @@
             <label for="pass" class="label">Visible</label>
             {{ form.visible }}
           </div>
+          <div class="group">
+            {{ form.captcha }}
+          </div>
           {% if user.is_authenticated and user == post.author %}
           <div class="group" id="author">
             <label style="color: rgb(163, 19, 19);" for="pass" class="label">Change Ownership of Post (IRREVERSIBLE)</label>
             {{ form.author }}
           </div>
           {% endif %}
-          <div class="group">
-            <label for="pass" class="label">Robot is that you ?! 🤔 </label>
-            {{ form.captcha }}
-          </div>
           <div class="group">
             <button class="button" type="submit">Post</button>
           </div>
