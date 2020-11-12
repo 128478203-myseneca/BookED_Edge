@@ -16,7 +16,7 @@
 
 - py -m venv booked_env
 
--.\env\Scripts\activate
+- .\env\Scripts\activate
 
 - pip install -r requirements.txt
 
@@ -24,23 +24,23 @@
 
 **Packages Used :**
 
--py -m pip install Django
+- py -m pip install Django
 
--pip install newsapi-python
+- pip install newsapi-python
 
--pip install Pillow
+- pip install Pillow
 
--pip install django-filter
+- pip install django-filter
 
--pip install django-crispy-forms
+- pip install django-crispy-forms
 
--pip install django-allauth
+- pip install django-allauth
 
 - pip install django-dirtyfields
 
 - pip install django-simple-captcha
 
-  -pip install django-utils-six
+- pip install django-utils-six
 
 **Extra Links :**
 
