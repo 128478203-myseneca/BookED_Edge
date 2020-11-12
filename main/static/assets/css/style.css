@@ -363,13 +363,14 @@ h6 {
 
 /* phone */
 
-@media (max-width: 978px) {
+@media (max-width: 750px) {
   .get-logout-btn,
   .get-started-btn,
   .get-post-btn,
   .get-register-btn {
-    width: 25%;
-    height: 25%;
+    text-align: center;
+    width: 50%;
+    height: 50%;
     margin-left: 10px;
     margin-top: 5px;
   }
@@ -857,7 +858,7 @@ section {
     text-align: center;
     margin-bottom: 20px;
     padding: 30px 20px;
-    background: #fff;
+    background: rgb(255, 255, 255);
   }
 
   .team .member img {
