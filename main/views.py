@@ -32,7 +32,6 @@ from django.views.generic import (
 )  # logic of post
 
 
-
 # News API
 newsapi = NewsApiClient("c368efff5ae140c896773ec0e2dcae10")
 data = newsapi.get_everything(
@@ -255,14 +254,16 @@ class PostUpdateView(
         return redirect("profile")  # FIX THIS
 
 
-class ReportCreateView(
-    SuccessMessageMixin, LoginRequiredMixin, CreateView
-):  # sets up form to create new post /post/new
+class ReportCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+
     model = Report_User
     template_name = "main/report_user_form.html"
-    fields = ["short_explanation", "reported", "content"]
+    fields = ["short_explanation", "content"]
     success_message = "Report Has been Forwarded to a Admin, thanks for making BookED a better place !!!"
 
     def form_valid(self, form):
+        next = self.request.POST.get("next")  # This keeps the post URL in memory
+        form.instance.url_report = next  # solution https://stackoverflow.com/questions/51509419/how-to-get-the-url-of-the-page-in-a-createview-of-the-report-flag-user-objectur?noredirect=1&lq=1
         form.instance.author = self.request.user  # get users name to put on the post
+        super().form_valid(form)
         return super().form_valid(form)

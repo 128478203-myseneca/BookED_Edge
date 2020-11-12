@@ -98,7 +98,7 @@ class Post(DirtyFieldsMixin, models.Model):
 
 class Report_User(models.Model):
     short_explanation = models.CharField(max_length=30)
-    reported = models.ForeignKey(User, on_delete=models.CASCADE)
+    url_report = models.CharField(max_length=30, null=True, blank=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="Users", null=True, blank=True
     )
