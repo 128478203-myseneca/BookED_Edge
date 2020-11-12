@@ -58,7 +58,7 @@
        
     
           {% if user.is_authenticated %}
-          <a href="{% url 'profile' %}" class="get-started-btn scrollto">Profile</a>
+          <a href="{% url 'profile' %}" class="get-started-btn scrollto">{{user.username}}'s Profile</a>
           <a href="{% url 'Post-Create' %}" class="get-post-btn scrollto">New Post</a>
           {% else %}
           <a href="{% url 'login' %}" class="get-started-btn scrollto">Login</a>

@@ -44,7 +44,7 @@
          </nav>
    
       {% if user.is_authenticated %}
-      <a href="{% url 'profile' %}" class="get-started-btn scrollto">Profile</a>
+      <a href="{% url 'profile' %}" class="get-started-btn scrollto">{{user.username}}'s Profile</a>
       <a href="{% url 'Post-Create' %}" class="get-post-btn scrollto">New Post</a>
       {% else %}
       <a href="{% url 'login' %}" class="get-started-btn scrollto">Login</a>
@@ -182,7 +182,7 @@
                 <h2>{{ post.date_posted|date:"F d, Y" }}</h2>
                 <p>{{ post.content|truncatewords:25 }}</p>
                 <p class="read-more">
-                  <a href="{% url 'User-Posts' post.author.username %}">Read More...</a>
+                  <a href="{% url 'Post-Detail' post.id %}">Read More...</a>
                 </p>
               </div>
             </div>

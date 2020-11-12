@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE) #one to one relationship with the user profile
+    user = models.OneToOneField(User, on_delete=models.CASCADE, max_length=12) #one to one relationship with the user profile
     image = models.ImageField(default='default.jpg', upload_to='profile_pics') #default profile image
     image_back = models.ImageField(default='default_back.jpg', upload_to='background_pics') #default profile image
     school = models.ForeignKey(main.models.School, on_delete=models.CASCADE, null=True, blank= True)
