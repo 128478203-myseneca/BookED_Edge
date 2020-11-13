@@ -51,6 +51,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("ajax/load-course/", users.views.load_course, name="ajax_load_course"),
     path(r"captcha/", include("captcha.urls")),
+    path(r"api/posts/", include("main.api.urls")),
 ]
 
 if settings.DEBUG:
