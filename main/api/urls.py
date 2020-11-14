@@ -12,8 +12,8 @@ from .views import (
 
 urlpatterns = [
     path(r"", PostListAPIView.as_view(), name="List-API"),
-    url(r"^create/$", PostCreateAPIView.as_view(), name="Create-API"),
-    url(r"(?P<pk>\d+)/$", PostDetailAPIView.as_view(), name="Detail-API"),
-    url(r"(?P<pk>\d+)/delete/$", PostDeleteAPIView.as_view(), name="Delete-API"),
-    url(r"(?P<pk>\d+)/update/$", PostUpdateAPIView.as_view(), name="Update-API"),
+    path("create/", PostCreateAPIView.as_view(), name="Create-API"),
+    path("<int:pk>/", PostDetailAPIView.as_view(), name="Detail-API"),
+    path("<int:pk>/delete/", PostDeleteAPIView.as_view(), name="Delete-API"),
+    path("<int:pk>/update/", PostUpdateAPIView.as_view(), name="Update-API"),
 ]

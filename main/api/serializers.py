@@ -1,4 +1,8 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import (
+    ModelSerializer,
+    SerializerMethodField,
+    HyperlinkedIdentityField,
+)
 from rest_framework import serializers
 from main.models import Post
 from django.utils import timezone
@@ -41,34 +45,79 @@ class PostUpdateSerializer(ModelSerializer):
 
 
 class PostListSerializer(ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="Detail-API", lookup_field="pk"
+    )
+    author = SerializerMethodField()
+    schools = SerializerMethodField()
+    course = SerializerMethodField()
+    classes = SerializerMethodField()
+
     class Meta:
         model = Post
         fields = [
+            "url",
             "title",
             "author",
-            "content",
             "schools",
             "course",
             "classes",
-            "isbn",
-            "semester",
             "date_posted",
         ]
 
+    def get_author(self, obj):
+        return str(obj.author.username)
+
+    def get_schools(self, obj):
+        return str(obj.schools)
+
+    def get_course(self, obj):
+        return str(obj.course)
+
+    def get_classes(self, obj):
+        return str(obj.classes)
+
 
 class PostDetailSerializer(ModelSerializer):
+    author = SerializerMethodField()
+    schools = SerializerMethodField()
+    course = SerializerMethodField()
+    classes = SerializerMethodField()
+    post_img = SerializerMethodField()
+
     class Meta:
         model = Post
         fields = [
             "id",
-            "title",
             "author",
+            "title",
             "content",
             "schools",
             "course",
             "classes",
             "isbn",
-            "date_posted",
-            "visible",
             "semester",
+            "visible",
+            "sponsored",
+            "date_posted",
+            "post_img",
         ]
+
+    def get_author(self, obj):
+        return str(obj.author.username)
+
+    def get_schools(self, obj):
+        return str(obj.schools)
+
+    def get_course(self, obj):
+        return str(obj.course)
+
+    def get_classes(self, obj):
+        return str(obj.classes)
+
+    def get_post_img(self, obj):
+        try:
+            post_img = obj.image.path
+        except:
+            post_img = None
+        return post_img
