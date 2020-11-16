@@ -64,7 +64,8 @@ class PostListAPIView(ListAPIView):
     filterset_fields = ["title", "content", "author", "schools", "course", "classes"]
     pagination_class = PageNumberPost  # PageNumberPagination
 
-    def get_queryset(self, *args, **kwargs):
+
+"""    def get_queryset(self, *args, **kwargs):
 
         qs = Post.objects.filter(visible=True)
         query = self.request.GET.get("q")
@@ -72,7 +73,7 @@ class PostListAPIView(ListAPIView):
             qs = qs.filter(
                 Q(title__icontains=query) | Q(content__icontains=query)
             ).distinct()
-        return qs
+        return qs"""
 
 
 class PostUpdateAPIView(RetrieveUpdateAPIView):

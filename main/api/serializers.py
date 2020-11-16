@@ -117,7 +117,7 @@ class PostDetailSerializer(ModelSerializer):
 
     def get_post_img(self, obj):
         try:
-            post_img = obj.image.path
+            post_img = obj.post_img.url
         except:
             post_img = None
-        return post_img
+        return str("http://127.0.0.1:8000" + post_img)  # CHANGE THIS
