@@ -38,27 +38,28 @@ from .serializers import (
 class PostCreateAPIView(CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostCreateSerializer
-    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
 
 class PostDetailAPIView(RetrieveAPIView):
+    # permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Post.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostDetailSerializer
 
 
 class PostDeleteAPIView(DestroyAPIView):
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     serializer_class = PostDetailSerializer
 
 
 class PostListAPIView(ListAPIView):
+    permission_classes = [AllowAny]
     queryset = Post.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostListSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ["title", "content", "author", "schools", "course", "classes"]
@@ -77,6 +78,9 @@ class PostListAPIView(ListAPIView):
 
 
 class PostUpdateAPIView(RetrieveUpdateAPIView):
-    queryset = Post.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
+    queryset = Post.objects.all()
     serializer_class = PostUpdateSerializer
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)

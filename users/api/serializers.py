@@ -2,20 +2,22 @@ from rest_framework.serializers import (
     ModelSerializer,
     SerializerMethodField,
     HyperlinkedIdentityField,
+    CharField,
+    EmailField,
+    ValidationError,
 )
-from rest_framework import serializers
-from rest_framework.serializers import ValidationError
-from main.models import Post
-from django.utils import timezone
+
 from django.contrib.auth import get_user_model
+from rest_framework import serializers
+from django.db.models import Q
 
 User = get_user_model()
 
 
 class UserCreateSerializer(ModelSerializer):
-    email = serializers.EmailField(label="Email Address")
-    email2 = serializers.EmailField(label="Confirm Email")
-    password2 = serializers.CharField(write_only=True, label="Confirm Password")
+    email = EmailField(label="Email Address")
+    email2 = EmailField(label="Confirm Email")
+    password2 = CharField(write_only=True, label="Confirm Password")
 
     class Meta:
         model = User
@@ -62,3 +64,43 @@ class UserCreateSerializer(ModelSerializer):
         if password1 != password2:
             raise ValidationError("Passwords does not match")
         return value
+
+
+class UserLoginSerializer(ModelSerializer):
+    token = CharField(allow_blank=True, read_only=True)
+    username = CharField(label="Username", allow_blank=True, required=False)
+
+    class Meta:
+        model = User
+        fields = ["username", "password", "token"]
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def validate(self, data):
+        user_obj = None
+        password = data["password"]
+        username = data.get("username", None)
+        if not username:
+            raise ValidationError("A username is required to login.")
+
+        user = User.objects.filter(  # CHECKS DATABASE TO SEE IF USER EXISTS
+            Q(username=username)
+        ).distinct()
+        if user.exists() and user.count() == 1:
+            user_obj = user.first()
+        else:
+            raise ValidationError("This username does not exist.")
+
+        if user_obj:
+            if not user_obj.check_password(password):
+                raise ValidationError("Credentials does not match.")
+
+        data["token"] = "A TOKEN"
+        return data
+
+
+class UserDetailSerializer(
+    ModelSerializer
+):  # show details of user at main/api/serializers.py -> PostDetail
+    class Meta:
+        model = User
+        fields = ["username", "email", "first_name", "last_name"]

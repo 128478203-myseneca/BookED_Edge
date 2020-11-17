@@ -155,3 +155,20 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "booked.reset@gmail.com"
 EMAIL_HOST_PASSWORD = "hdaxgaspnpicmlrl"
+
+
+# rest framework
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",  # add gui interface
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",  # delete this
+        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+        # "rest_framework.authentication.BasicAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",  # default permission for all api
+    ],
+}

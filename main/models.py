@@ -60,7 +60,7 @@ class Post(DirtyFieldsMixin, models.Model):
         "School", null=True, blank=True, on_delete=models.CASCADE
     )
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
-    classes = models.ManyToManyField(Class)
+    classes = models.ManyToManyField(Class, null=True, blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
     semester = models.ForeignKey(
         "Semester", null=True, blank=True, on_delete=models.CASCADE

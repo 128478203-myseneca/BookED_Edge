@@ -6,6 +6,7 @@ from rest_framework.serializers import (
 from rest_framework import serializers
 from main.models import Post
 from django.utils import timezone
+from users.api.serializers import UserDetailSerializer
 
 
 class PostCreateSerializer(ModelSerializer):
@@ -26,6 +27,12 @@ class PostCreateSerializer(ModelSerializer):
             "visible",
             "date_posted",
         ]
+
+        # extra_kwargs = {"title": {"required": False}, "content": {"required": False}}
+
+    def get_validation_exclusions(self):
+        exclusions = super(PostUpdateSerializer, self).get_validation_exclusions()
+        return exclusions + ["title", "content"]
 
 
 class PostUpdateSerializer(ModelSerializer):
@@ -79,7 +86,7 @@ class PostListSerializer(ModelSerializer):
 
 
 class PostDetailSerializer(ModelSerializer):
-    author = SerializerMethodField()
+    author = UserDetailSerializer(read_only=True)
     schools = SerializerMethodField()
     course = SerializerMethodField()
     classes = SerializerMethodField()
@@ -102,9 +109,6 @@ class PostDetailSerializer(ModelSerializer):
             "date_posted",
             "post_img",
         ]
-
-    def get_author(self, obj):
-        return str(obj.author.username)
 
     def get_schools(self, obj):
         return str(obj.schools)

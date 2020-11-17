@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views  # login/logout forms
 from django.urls import path, include
 from users import views as user_views  # register forms
 import users
+from rest_framework_jwt.views import obtain_jwt_token
 
 
 urlpatterns = [
@@ -53,6 +54,7 @@ urlpatterns = [
     path(r"captcha/", include("captcha.urls")),
     path(r"api/posts/", include("main.api.urls"), name="Posts-API"),
     path(r"api/users/", include("users.api.urls"), name="Users-API"),
+    path(r"api/auth/token-auth/", obtain_jwt_token),
 ]
 
 if settings.DEBUG:
