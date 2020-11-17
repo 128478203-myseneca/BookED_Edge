@@ -11,7 +11,6 @@ from users.api.serializers import UserDetailSerializer
 
 class PostCreateSerializer(ModelSerializer):
 
-    # author = serializers.HiddenField(default=serializers.CurrentUserDefault())
     date_posted = serializers.HiddenField(default=timezone.now)
 
     class Meta:
@@ -28,7 +27,7 @@ class PostCreateSerializer(ModelSerializer):
             "date_posted",
         ]
 
-        # extra_kwargs = {"title": {"required": False}, "content": {"required": False}}
+        # extra_kwargs = {"title": {"required": False}, "content": {"required": False}} #takes away the required parameter from fields
 
     def get_validation_exclusions(self):
         exclusions = super(PostUpdateSerializer, self).get_validation_exclusions()
@@ -72,7 +71,9 @@ class PostListSerializer(ModelSerializer):
             "date_posted",
         ]
 
-    def get_author(self, obj):
+    def get_author(
+        self, obj
+    ):  # this function is used to return the actual name of the object not the number id
         return str(obj.author.username)
 
     def get_schools(self, obj):

@@ -75,12 +75,7 @@ def filters(request):
         course_all = request.user.profile.course
         classes_all = request.user.profile.classes
         semester_all = request.user.profile.semester
-        # schools_all = School.objects.order_by('name') #alphabetical order
-        # course_all = Course.objects.order_by('name') #alphabetical order
-        # classes_all = Classes.objects.order_by('name') #alphabetical order
-        qs = Post.objects.filter(
-            visible=True
-        )  # Post.objects.all().order_by('-date_posted')
+        qs = Post.objects.filter(visible=True)
         title_contains_query = request.GET.get("title_contains")
         isbn_query = request.GET.get("title_or_author")
         semester_query = request.GET.get("semester")
@@ -195,8 +190,8 @@ class PostCreateView(
             self.request.user.email
         )  # get user email, and send email confirming post if valid
         send_mail(
-            "You post has been created succesfuly !!!",
-            "You post has been created succesfuly !!!",
+            "You post has been created successfully !!!",
+            "You post has been created successfully !!!",
             "booked.reset@gmail.com",
             [user_email],
             fail_silently=False,
@@ -222,10 +217,6 @@ class PostUpdateView(
         "visible",
         "author",
     ]
-    # def form_valid(self, form):
-    # form.instance.author =  form.author   #self.request.user #get users name to put on the post
-    # return super().form_valid(form)
-    # form.instance.author =  form.author   #self.request.user #get users name to put on the post
 
     def test_func(self):  # blocks user from editing posts that are not theirs
         post = self.get_object()

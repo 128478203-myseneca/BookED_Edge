@@ -40,11 +40,10 @@ class PostCreateAPIView(CreateAPIView):
     serializer_class = PostCreateSerializer
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        serializer.save(author=self.request.user)  # sets author of the post
 
 
 class PostDetailAPIView(RetrieveAPIView):
-    # permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
 
@@ -52,18 +51,16 @@ class PostDetailAPIView(RetrieveAPIView):
 class PostDeleteAPIView(DestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.all()
-    # permission_classes = [IsAuthenticated]
     serializer_class = PostDetailSerializer
 
 
 class PostListAPIView(ListAPIView):
     permission_classes = [AllowAny]
     queryset = Post.objects.all()
-    # permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostListSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ["title", "content", "author", "schools", "course", "classes"]
-    pagination_class = PageNumberPost  # PageNumberPagination
+    pagination_class = PageNumberPost
 
 
 """    def get_queryset(self, *args, **kwargs):

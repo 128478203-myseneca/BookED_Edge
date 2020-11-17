@@ -60,7 +60,7 @@ class Post(DirtyFieldsMixin, models.Model):
         "School", null=True, blank=True, on_delete=models.CASCADE
     )
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
-    classes = models.ManyToManyField(Class, null=True, blank=True)
+    classes = models.ManyToManyField(Class)
     date_posted = models.DateTimeField(default=timezone.now)
     semester = models.ForeignKey(
         "Semester", null=True, blank=True, on_delete=models.CASCADE
@@ -70,7 +70,7 @@ class Post(DirtyFieldsMixin, models.Model):
     post_img = models.ImageField(upload_to="post_image", default="default.jpg")
     author = models.ForeignKey(
         User, on_delete=models.CASCADE
-    )  # deleted post if user is deleted
+    )  # CASCADE = deleted post if user is deleted
     sponsored = models.BooleanField(default=False)
     visible = models.BooleanField(default=False)
 
@@ -90,7 +90,7 @@ class Post(DirtyFieldsMixin, models.Model):
     def get_absolute_url(self):
         return reverse(
             "Post-Detail", kwargs={"pk": self.pk}
-        )  # when person creates post redirects itself to the created post after submitted
+        )  # when user creates post redirects itself to the created post after submitted
 
     class Meta:
         ordering = ["-date_posted"]
@@ -109,9 +109,7 @@ class Report_User(models.Model):
         return self.short_explanation
 
     def get_absolute_url(self):
-        return reverse(
-            "Main-Home"
-        )  # when person creates post redirects itself to the created post after submitted
+        return reverse("Main-Home")
 
     class Meta:
         verbose_name_plural = "UserReports"

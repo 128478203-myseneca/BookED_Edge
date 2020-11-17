@@ -62,17 +62,22 @@ Documentation:
 
 - https://jpadilla.github.io/django-rest-framework-jwt/ (jwt auth api)
 
-  - Create Token : curl -X POST -d "username=rex&password=zebra12345" http://127.0.0.1:8000/api/auth/token-auth/
+Requests:
 
-  - Create Post:
+- Create Token : curl -X POST -d "username=rex&password=zebra12345" http://127.0.0.1:8000/api/auth/token-auth/
 
-                    curl -g -X POST -H "Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InJleCIsImV4cCI6MTYwNTU4NjAxMSwiZW1haWwiOiJpc3R2YW5mOEBob3RtYWlsLmNvbSJ9.c8jO9470QKiGw-nDLug-iXNrgzt9iWg4aOAv62D6KnM"  -d '{
-                        "title": "Hello",
-                        "content": "Hiiiiii",
-                        "schools": 1,
-                        "course": 1,
-                        "classes": [1],
-                        "isbn": 232323,
-                        "semester": 3,
-                        "visible": false
-                    }' http://127.0.0.1:8000/api/posts/create/?type=post
+- Create Post:
+
+            - curl -X POST -H  "Authorization: JWT <token>" -H "Content-Type: application/json" -d '{
+                 \"title\": \"Hello there\",
+                     \"content\": \"high ground\",
+                     \"schools\": "1",
+                     \"course\": "1",
+                     \"classes\": [
+                         "1"
+                     ],
+                     \"isbn\": 12312,
+                     \"semester\": "1",
+                     \"visible\": true
+
+}' 'http://127.0.0.1:8000/api/posts/create/?type=post'

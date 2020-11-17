@@ -82,7 +82,7 @@ class UserLoginSerializer(ModelSerializer):
         if not username:
             raise ValidationError("A username is required to login.")
 
-        user = User.objects.filter(  # CHECKS DATABASE TO SEE IF USER EXISTS
+        user = User.objects.filter(  # checks database to see if user exists
             Q(username=username)
         ).distinct()
         if user.exists() and user.count() == 1:

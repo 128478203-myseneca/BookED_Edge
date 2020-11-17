@@ -148,7 +148,7 @@ LOGIN_REDIRECT_URL = "/profile"
 
 LOGIN_URL = "login"  # redirects /profile to /login if you are not logged in
 
-# reset passowrd config
+# Reset password configuration
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
@@ -156,19 +156,18 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "booked.reset@gmail.com"
 EMAIL_HOST_PASSWORD = "hdaxgaspnpicmlrl"
 
-
-# rest framework
+# Rest Framework
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
-        "rest_framework.renderers.BrowsableAPIRenderer",  # add gui interface
+        "rest_framework.renderers.BrowsableAPIRenderer",  # Add gui interface
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",  # delete this
-        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",  # Delete this
+        "rest_framework_jwt.authentication.JSONWebTokenAuthentication"
         # "rest_framework.authentication.BasicAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",  # default permission for all api
+        "rest_framework.permissions.IsAuthenticated"  # Default permission for all apis
     ],
 }

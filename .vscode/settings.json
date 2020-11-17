@@ -3,6 +3,7 @@
     "cSpell.ignoreWords": [
         "allauth",
         "dirtyfields",
+        "djangorestframework",
         "newsapi",
         "venv",
         "virtualenv"
