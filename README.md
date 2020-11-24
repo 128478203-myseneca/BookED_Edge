@@ -44,6 +44,8 @@
 
 - pip install djangorestframework-jwt
 
+- pip install https://github.com/darklow/django-suit/tarball/v2
+
 **Extra Links :**
 
 Pagination/filtering solution = https://www.youtube.com/watch?v=dkJ3uqkdCcY , https://simpleisbetterthancomplex.com/snippet/2016/08/22/dealing-with-querystring-parameters.html
