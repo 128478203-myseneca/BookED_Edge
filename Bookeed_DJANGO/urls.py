@@ -7,6 +7,8 @@ from users import views as user_views  # register forms
 import users
 from rest_framework_jwt.views import obtain_jwt_token
 
+admin.site.site_header = settings.ADMIN_SITE_HEADER
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),

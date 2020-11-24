@@ -32,7 +32,7 @@
                   <form method="POST">
                     {% csrf_token %}
                   <div class="group">
-                    <h3 class="dangerous">Are you sure you want to delete "{{ object }}"?</h3> 
+                    <h3>Are you sure you want to permanently delete <h3 class="dangerous">"{{ object }}"</h3></h3> 
                   </div>
                 <div class="group">
                   <input type="submit" value="Confirm" class="btn btn-danger btn-sm mt-1 mb-1"></input>

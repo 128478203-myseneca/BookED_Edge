@@ -26,7 +26,7 @@ SECRET_KEY = "%#%9goh=6fdze(&69l393k)d777b2nq&*vcl3+52fxcf_8vy%t"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.0.16"]
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "django.contrib.sites",
+    "Bookeed_DJANGO.apps.SuitConfig",
     "main.apps.MainConfig",
     "users.apps.UsersConfig",
     "crispy_forms",
@@ -160,7 +161,7 @@ EMAIL_HOST_PASSWORD = "hdaxgaspnpicmlrl"
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
-        "rest_framework.renderers.BrowsableAPIRenderer",  # Add gui interface
+        # "rest_framework.renderers.BrowsableAPIRenderer",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",  # Delete this
@@ -170,4 +171,11 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated"  # Default permission for all apis
     ],
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+    ],
 }
+
+# Suit Config (Admin Interface)
+
+ADMIN_SITE_HEADER = "BookED Administration"

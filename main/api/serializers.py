@@ -51,24 +51,28 @@ class PostUpdateSerializer(ModelSerializer):
 
 
 class PostListSerializer(ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name="Detail-API", lookup_field="pk"
-    )
+    #  url = serializers.HyperlinkedIdentityField(
+    #     view_name="Detail-API", lookup_field="pk"
+    # )
     author = SerializerMethodField()
     schools = SerializerMethodField()
     course = SerializerMethodField()
     classes = SerializerMethodField()
+    post_img = SerializerMethodField()
 
     class Meta:
         model = Post
         fields = [
-            "url",
+            # "id",
+            # "url",
             "title",
             "author",
+            "content",
             "schools",
             "course",
             "classes",
             "date_posted",
+            "post_img",
         ]
 
     def get_author(
@@ -84,6 +88,13 @@ class PostListSerializer(ModelSerializer):
 
     def get_classes(self, obj):
         return str(obj.classes)
+
+    def get_post_img(self, obj):
+        try:
+            post_img = obj.author.profile.image.url
+        except:
+            post_img = None
+        return str("http://192.168.0.16:8000" + post_img)  # CHANGE THIS
 
 
 class PostDetailSerializer(ModelSerializer):
