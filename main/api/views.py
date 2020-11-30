@@ -60,7 +60,7 @@ class PostListAPIView(ListAPIView):
     serializer_class = PostListSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ["title", "content", "author", "schools", "course", "classes"]
-    pagination_class = PageNumberPost
+    # pagination_class = PageNumberPost
 
 
 """    def get_queryset(self, *args, **kwargs):

@@ -91,9 +91,9 @@ class PostListSerializer(ModelSerializer):
 
     def get_post_img(self, obj):
         try:
-            post_img = obj.author.profile.image.url
+            post_img = obj.post_img.url
         except:
-            post_img = None
+            post_img = obj.author.profile.image.url
         return str("http://192.168.0.16:8000" + post_img)  # CHANGE THIS
 
 
