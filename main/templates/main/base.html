@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Book ED - Home Page</title>
-  
-  
+  <title>Book ED - Home Page</title>
+
+
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -17,28 +17,35 @@
   <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css ">
+    
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  
+  
 
   <!-- Template Main CSS File -->
+  
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+   
+  <link href="{% static 'assets/css/galery.css' %}" rel="stylesheet">
 
 </head>
 
 <body>
-<div class='fixed-top'>
- {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-{{ message.tags }} alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            {{message}}
-          </div>
-        {% endfor %}
-  {% endif %}
-</div>
+  <div class='fixed-top'>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
 
   <!-- ======= Header ======= -->
 
@@ -46,17 +53,19 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <a href="/"><img src="{% static 'assets/img/BookED_Logo1.png' %}" alt="MainLogo" class="img-fluid" width="100" height="100"></a>
+      <a href="/"><img src="{% static 'assets/img/BookED_Logo1.png' %}" alt="MainLogo" class="img-fluid" width="100"
+          height="100"></a>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="#hero">Home</a></li>
-          <li><a href="{% url 'Filter' %}">Your Book Selection</a></li>
-          <li><a href="#faqs">FAQs</a></li>
+          <li><a href="{% url 'Filter' %}">Your Book Selection <i class="fa fa-book" aria-hidden="true"></i></a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#team">Team</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+         
+          <li><a href="#news">News</a></li>
 
- <!-- Dropdown if we come to use          
+          <!-- Dropdown if we use this        
    
   <li class="drop-down"><a href="">Drop Down</a>
             <ul>
@@ -78,20 +87,20 @@
 
           <li><a href="#contact">Contact</a></li>
 
-      
 
-      {% if user.is_authenticated %}
-      <a href="{% url 'profile' %}" class="get-started-btn scrollto">{{user.username}}'s Profile</a>
-      <a href="{% url 'Post-Create' %}" class="get-post-btn scrollto">New Post</a>
-      
 
-      {% else %}
-      <a href="{% url 'login' %}" class="get-started-btn scrollto">Login</a>
-      <a href="{% url 'register' %}" class="get-register-btn scrollto">Register</a>
-      {% endif %}
-      
-    </ul>
-  </nav><!-- .nav-menu -->
+          {% if user.is_authenticated %}
+          <a href="{% url 'profile' %}" class="get-started-btn scrollto">{{user.username}}'s Profile <i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+          <a href="{% url 'Post-Create' %}" class="get-post-btn scrollto">Publish New Book <i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+
+
+          {% else %}
+          <a href="{% url 'login' %}" class="get-started-btn scrollto">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+          <a href="{% url 'register' %}" class="get-register-btn scrollto">Register <i class="fa fa-address-book" aria-hidden="true"></i></a>
+          {% endif %}
+
+        </ul>
+      </nav><!-- .nav-menu -->
     </div>
   </header><!-- End Header -->
   <!-- ======= Hero Section ======= -->
@@ -101,10 +110,12 @@
       <div class="row">
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1>You are helping others and the environment</h1>
-          <h2>By reselling your used book you help students out with their tight budgets and help preserve the nature by reusing it</h2>
+          <h2>By reselling your used book you help students out with their tight budgets and help preserve the nature by
+            reusing it</h2>
           <div class="d-flex">
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="venobox btn-watch-video" data-vbtype="video" data-autoplay="true"> Watch Video <i class="icofont icofont-youtube-play"></i></a>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="venobox btn-watch-video" data-vbtype="video"
+              data-autoplay="true"> Watch Video <i class="icofont icofont-youtube-play"></i></a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
@@ -120,92 +131,19 @@
     <!-- ======= Explore Section ======= -->
 
     <section id="cta" class="cta" style="background: #13c56f;color: white;">
-      <div class="container" >
+      <div class="container">
 
         <div class="text-center">
           <h3>Would you like to start exploring ?</h3>
           <p> Wait no more and explore the rich marketplace.</p>
-          <a class="btn btn-outline-light" href="{% url 'Main-Market' %}">GO TO MARKETPLACE</a>
+          <a class="btn btn-outline-light" href="{% url 'Main-Market' %}">GO TO MARKETPLACE <i class="fa fa-book" aria-hidden="true"></i></a>
         </div>
 
       </div>
     </section><!-- End Explore Section -->
 
-    <br>
-
-    <!-- ======= News Section ======= -->
-    
-    {%block content%}{%endblock%}
-    
-    <!-- End News Section -->
-
-
-    <!-- ======= Services Section ======= -->
-    <section class="services section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <span>FAQs</span>
-          <h2 id="faqs">FAQs</h2>
-          <p>Here you can find the most frequent questions, if you have anymore questions please feel free to contact us <a href='#contact'>here</a></p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspiciatis</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-slideshow"></i></div>
-              <h4><a href="">Dele cardo</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-arch"></i></div>
-              <h4><a href="">Divera don</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+     <!-- ======= About Section ======= -->
+     <section id="about" class="about">
       <div class="container">
         <div class="section-title">
           <span>About</span>
@@ -216,15 +154,18 @@
             <img src="./static/assets/img/extras/students_about.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content">
-            <h3>BookED is a open plataform for students and teacher that are willing to sell their used book to others in need</h3>
+            <h3>BookED is a open platform for students and teacher that are willing to sell their used book to others
+              in need</h3>
             <p class="font-italic">
-              The process is simple, all you have to do is create an account and post all the books that you will to sell.
+              The process is simple, all you have to do is create an account and post all the books that you will to
+              sell.
             </p>
             <ul>
-              <li><i class="icofont-check-circled"></i> Create your account at <a href="http://127.0.0.1:8000/register/"><b>booked.com/register</b></a></li>
+              <li><i class="icofont-check-circled"></i> Create your account at <a
+                  href="http://127.0.0.1:8000/register/"><b>booked.com/register</b></a></li>
               <li><i class="icofont-check-circled"></i> Select the books that you wish to sell</li>
               <li><i class="icofont-check-circled"></i> Make yourself and others happy</li>
-            </ul> 
+            </ul>
             <p>
               Really ! That is all you have to do :)
             </p>
@@ -234,75 +175,137 @@
       </div>
     </section><!-- End About Section -->
 
+     <!-- ======= Services Section ======= -->
+     <section class="services section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <span>FAQs</span>
+          <h2 id="faqs">FAQs</h2>
+          <p>Here you can find the most frequent questions, if you have any more questions please feel free to <a style="font-weight: bolder;" href="{% url 'Suggestion-Form' %}">contact us</a>.
+            <a href='#contact'>here</a></p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="icon-box">
+              
+              <h4><a href="">What is BookED ?</a></h4>
+              <p>BookED is a platform for students to sell and buy used books that they don't need anymore.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <div class="icon-box">
+              
+              <h4><a href="">How do I use the book filter ?</a></h4>
+              <p>Simply create a account, select the book filters that you wish to use in your profile and go to "Your Book Selection"</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+            <div class="icon-box">
+              
+              <h4><a href="">How do I buy a book ?</a></h4>
+              <p>After creating an account go to the book page in which you wish to but a click on "Buy Book" then an email will be send to the author of the post with your information contact.  </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <h4><a href="">What if the Seller doesn't respond me ?</a></h4>
+              <p>After a week if the seller doesn't respond, open up a ticket by using the "Report User" in the post that you have interest feature and describe what happened.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <h4><a href="">I have some suggestions where can I leave them ?</a></h4>
+              <p>We are open for any kind of suggestions regarding BookED please if you have any access send it using the  <a style="font-weight: bolder;" href="{% url 'Suggestion-Form' %}">Suggestion Form</a>.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <!-- <div class="icon"><i class="bx bx-arch"></i></div> -->
+              <h4><a href="">What if I don't want to use the filter ?</a></h4>
+              <p>Simply access the <a style="font-weight: bolder;" href="{% url 'Main-Market' %}">Marketplace</a> which displays all books posted. </p>
+            </div>
+          </div> 
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= News Section ======= -->
+<div id="news">
+    {%block content%}{%endblock%}
+  </div>
+    <!-- End News Section -->
+
+
+  <br>
+
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials section-bg">
       <div class="container">
 
         <div class="section-title">
-          <span>Testimonials</span>
-          <h2>Testimonials</h2>
-          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+          <span>Institutions</span>
+          <h2>Institutions</h2>
+          <p>All colleges and universities that use our platform</p>
         </div>
 
-        <div class="owl-carousel testimonials-carousel">
-
-          <div class="testimonial-item">
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            <img src="./static/assets/img/extras/book_hero.jpg" class="testimonial-img" alt="">
-            <h3>Saul Goodman</h3>
-            <h4>Ceo &amp; Founder</h4>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            
+              <div class="gallery-img">
+                <img src="{% static '\assets\img\schools\Seneca.png' %}" class="testimonial-img" style="max-width: 250px;max-height: 65px;">
+              
+            </div>
           </div>
 
-          <div class="testimonial-item">
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            <img src="./static/assets/img/extras/book_hero.jpg" class="testimonial-img" alt="">
-            <h3>Sara Wilsson</h3>
-            <h4>Designer</h4>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            
+              
+              <div class="gallery-img">
+                <img src="{% static '\assets\img\schools\uft.png' %}" class="testimonial-img" style="max-width: 300px;max-height: 95px;">
+           
+            </div>
           </div>
 
-          <div class="testimonial-item">
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            <img src="./static/assets/img/extras/book_hero.jpg" class="testimonial-img" alt="">
-            <h3>Jena Karlis</h3>
-            <h4>Store Owner</h4>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            
+              <div class="gallery-img">
+                <img src="{% static '\assets\img\schools\centenniel.jpeg' %}" class="testimonial-img" style="max-width: 300px;max-height: 85px;">
+           
+            </div>
           </div>
 
-          <div class="testimonial-item">
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            <img src="./static/assets/img/extras/book_hero.jpg" class="testimonial-img" alt="">
-            <h3>Matt Brandon</h3>
-            <h4>Freelancer</h4>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            
+              <div class="gallery-img">
+                <img src="{% static '\assets\img\schools\york.png' %}" class="testimonial-img" style="max-width: 300px;max-height: 85px;">
+            
+            </div>
           </div>
-
-          <div class="testimonial-item">
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            <img src="./static/assets/img/extras/book_hero.jpg" class="testimonial-img" alt="">
-            <h3>John Larson</h3>
-            <h4>Entrepreneur</h4>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+              
+                <div class="gallery-img">
+                  <img src="{% static '\assets\img\schools\humber.png' %}" class="testimonial-img" style="max-width: 300px;max-height: 85px;">
+                
+              </div>
+              </div>
+              <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                
+                  <div class="gallery-img">
+                    <img src="{% static '\assets\img\schools\ryerson.png' %}" class="testimonial-img" style="max-width: 500px;max-height: 110px;">
+                  
+                </div>
+              </div>
           </div>
-
-        </div>
-
+          
       </div>
     </section><!-- End Testimonials Section -->
 
@@ -323,7 +326,8 @@
               <h4>Istvan</h4>
               <span>Chief Executive Officer</span>
               <p>
-                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
+                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut
+                aut
               </p>
               <div class="social">
                 <a href=""><i class="icofont-twitter"></i></a>
@@ -377,12 +381,12 @@
     <!-- ======= Explore Section ======= -->
 
     <section id="cta" class="cta" style="background: #16df7e;color: white;">
-      <div class="container" >
+      <div class="container">
 
         <div class="text-center">
-          <h3>Would you like to start exploring ?</h3>
-          <p> Wait no more and explore the rich marketplace.</p>
-          <a class="btn btn-outline-light" href="{% url 'Main-Market' %}">GO TO MARKETPLACE</a>
+          <h3>Haven't created a account yet ?</h3>
+          <p> Wait no more and explore all the possibilities that BookED has to offer.</p>
+          <a class="btn btn-outline-light" href="{% url 'register' %}">REGISTER <i class="fa fa-address-book" aria-hidden="true"></i></a>
         </div>
 
       </div>
@@ -399,15 +403,10 @@
           <p>Any questions regarding the website ? feel free to contact our support team.</p>
         </div>
 
-        <div class="row">
+        
 
-          <div class="col-lg-5 d-flex align-items-stretch">
+          <div style="text-align: center;" >
             <div class="info">
-              <div class="address">
-                <i class="icofont-google-map"></i>
-                <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
 
               <div class="email">
                 <i class="icofont-envelope"></i>
@@ -421,45 +420,18 @@
                 <p>+1 5589 55488 55s</p>
               </div>
 
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+             
+
+
+           <!--  <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+                frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe> --> 
             </div>
 
           </div>
 
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="name">Your Name</label>
-                  <input type="text" name="name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validate"></div>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validate"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
-                <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" data-rule="required" data-msg="Please write something for us"></textarea>
-                <div class="validate"></div>
-              </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
 
-        </div>
+        
 
       </div>
     </section><!-- End Contact Section -->
@@ -467,88 +439,90 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
- 
+
   <footer id="footer">
 
     <footer>
       <div class="row justify-content-around mb-0 pt-5 pb-0 ">
-          <div class=" col-11">
-              <div class="row justify-content-center">
-                  <div class="col-md-3 col-12 font-italic align-items-center mt-md-3 mt-4">
-                      <h5><span> <img class="image-footer"  src="{% static 'assets/img/BookED_Logo1.png' %}" class="img-fluid mb-1 "></span><b class="text-dark"> Book<span style="color: green;"> ED</span></b></h5>
-                      <div class="footer-top">
+        <div class=" col-11">
+          <div class="row justify-content-center">
+            <div class="col-md-3 col-12 font-italic align-items-center mt-md-3 mt-4">
+              <h5><span> <img class="image-footer" src="{% static 'assets/img/BookED_Logo1.png' %}"
+                    class="img-fluid mb-1 "></span></h5>
+              <div class="footer-top">
 
-                        <div class="social-links" style="margin-left: 15px;">
-                          <a href="#" class="twitter"><i class="bx bxl-twitter  bx-sm"></i></a>
-                          <a href="#" class="facebook"><i class="bx bxl-facebook  bx-sm"></i></a>
-                          <a href="#" class="instagram"><i class="bx bxl-instagram  bx-sm"></i></a>
-                          <a href="#" class="linkedin"><i class="bx bxl-linkedin  bx-sm"></i></a>
-                        </div>
-                  
-                      </div>
-                  </div>
-                  <div class="col-md-3 col-12 my-sm-0 mt-5">
-                      <ul class="list-unstyled">
-                          <li class="mt-md-3 mt-4" style="font-weight: bolder;">Home</li>
-                          <li>Your Book Selection</li>
-                          <li>FAQs</li>
-                          <li>About</li>
-                          <li>Team</li>
-                          <li>Contact</li>
-                      </ul>
-                  </div>
-                  <div class="col-md-3 col-12 my-sm-0 mt-5">
-                      <ul class="list-unstyled">
-                          <li class="mt-md-3 mt-4" style="font-weight: bolder;">Seeking for help ?</li>
-                          <li>Our Contect</li>
-                          <li>Forum</li>
-                          <li>Discord</li>
-                          <li>Social Medias</li>
-                      </ul>
-                  </div>
-                  <div class="col-xl-auto col-md-3 col-12 my-sm-0 mt-5">
-                      <ul class="list-unstyled">
-                          <li class="mt-md-3 mt-4" style="font-weight: bolder;">Special Offers</li>
-                          <li>Intergrated Security Platfors</li>
-                          <li>Core Features</li>
-                          <li>Product Features</li>
-                          <li>Pricing</li>
-                      </ul>
-                  </div>
+                <div class="social-links" style="margin-left: 15px;">
+                  <a href="#" class="twitter"><i class="bx bxl-twitter  bx-sm"></i></a>
+                  <a href="#" class="facebook"><i class="bx bxl-facebook  bx-sm"></i></a>
+                  <a href="#" class="instagram"><i class="bx bxl-instagram  bx-sm"></i></a>
+                  <a href="#" class="linkedin"><i class="bx bxl-linkedin  bx-sm"></i></a>
+                </div>
+
               </div>
+            </div>
+            <div class="col-md-3 col-12 my-sm-0 mt-5">
+              <ul class="list-unstyled">
+                <li class="mt-md-3 mt-4" style="font-weight: bolder;">Home</li>
+                <li>Your Book Selection </li>
+                <li>FAQs</li>
+                <li>About</li>
+                <li>Team</li>
+                <li>Contact</li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-12 my-sm-0 mt-5">
+              <ul class="list-unstyled">
+                <li class="mt-md-3 mt-4" style="font-weight: bolder;">Seeking for help ?</li>
+                <li>Our Contect</li>
+                <li>Forum</li>
+                <li>Discord</li>
+                <li>Social Medias</li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-12 my-sm-0 mt-5">
+              <ul class="list-unstyled">
+                
+
+                <a href="{% url 'Suggestion-Form' %}"  type="button" class="btn btn-warning" style="color: white;font-weight: bold;position:absolute; bottom:0;margin-bottom: 30px;">Any Suggestion ?</a>
+            </ul>
           </div>
+        </div>
       </div>
-</div>
-    </div>
-  </footer><!-- End Footer -->
+      </div>
 
-  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+      </div>
+      </div>
+    </footer><!-- End Footer -->
 
-  <!-- Vendor JS Files -->
-  
-  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
-  <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-  <script>
- 
-	$(window).load(function() {
-		// Animate loader off screen
-		$(".se-pre-con").fadeOut("slow");;
-	});
-  </script>
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- Vendor JS Files -->
+
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script>
+
+      $(window).load(function () {
+        // Animate loader off screen
+        $(".se-pre-con").fadeOut("slow");;
+      });
+    </script>
 
 
-  <!-- Template Main JS File -->
-  <script src="{% static 'assets/js/main.js' %}"></script>
-</center>
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    </center>
+    
 
 </body>
+
 </html>

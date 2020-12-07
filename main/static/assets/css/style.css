@@ -731,80 +731,10 @@ section {
   /*--------------------------------------------------------------
 # Testimonials
 --------------------------------------------------------------*/
-  .testimonials .testimonial-item {
-    box-sizing: content-box;
-    min-height: 320px;
-  }
 
-  .testimonials .testimonial-item .testimonial-img {
-    width: 90px;
-    border-radius: 50%;
-    margin: -40px 0 0 40px;
-    position: relative;
-    z-index: 2;
-    border: 6px solid #fff;
-  }
-
-  .testimonials .testimonial-item h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10px 0 5px 45px;
-    color: #111;
-  }
-
-  .testimonials .testimonial-item h4 {
-    font-size: 14px;
-    color: #999;
-    margin: 0 0 0 45px;
-  }
-
-  .testimonials .testimonial-item .quote-icon-left,
-  .testimonials .testimonial-item .quote-icon-right {
-    color: #e4e6ea;
-    font-size: 26px;
-  }
-
-  .testimonials .testimonial-item .quote-icon-left {
-    display: inline-block;
-    left: -5px;
-    position: relative;
-  }
-
-  .testimonials .testimonial-item .quote-icon-right {
-    display: inline-block;
-    right: -5px;
-    position: relative;
-    top: 10px;
-  }
-
-  .testimonials .testimonial-item p {
-    font-style: italic;
-    margin: 0 15px 0 15px;
-    padding: 20px 20px 60px 20px;
-    background: white;
-    position: relative;
-    border-radius: 6px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .testimonials .owl-nav,
-  .testimonials .owl-dots {
-    margin-top: 5px;
-    text-align: center;
-  }
-
-  .testimonials .owl-dot {
-    display: inline-block;
-    margin: 0 5px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #ddd !important;
-  }
-
-  .testimonials .owl-dot.active {
-    background-color: #16df7e !important;
+  .testimonial-item {
+    height: 250px;
+    width: 250px;
   }
 
   /* phone */
@@ -904,6 +834,10 @@ section {
   .team .member .social i {
     font-size: 18px;
     margin: 0 2px;
+  }
+
+  .schools_logo {
+    margin: 8px;
   }
 
   /*--------------------------------------------------------------
@@ -1352,6 +1286,10 @@ section {
   /* phone */
 
   @media (max-width: 992px) {
+    #footer {
+      height: 1250px;
+    }
+
     #footer .copyright,
     #footer .credits {
       float: none;
@@ -1753,6 +1691,14 @@ section {
   width: 100%;
   height: auto;
   width: calc(17px + 8 * ((400vw - 400px) / 680));
+}
+
+@media only screen and (max-width: 920px) {
+  .image-footer {
+    margin-left: 100px;
+    height: 125px;
+    width: 125px;
+  }
 }
 
 footer {

@@ -1,7 +1,7 @@
 import users
 import datetime as dt  # extra
 from newsapi import NewsApiClient  # extra
-from .models import Post, School, Semester, Course, Report_User
+from .models import Post, School, Semester, Course, Report_User, Suggestion
 from .models import Class as Classes  # change name because of compatibility
 from .filters import PostFilter
 from .forms import PostCreateForm
@@ -255,5 +255,18 @@ class ReportCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         next = self.request.POST.get("next")  # This keeps the post URL in memory
         form.instance.url_report = next  # solution https://stackoverflow.com/questions/51509419/how-to-get-the-url-of-the-page-in-a-createview-of-the-report-flag-user-objectur?noredirect=1&lq=1
+        form.instance.author = self.request.user  # get users name to put on the post
+        return super().form_valid(form)
+
+
+class SuggestionCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+
+    model = Suggestion
+    template_name = "main/suggestion_form.html"
+    fields = ["short_explanation", "content"]
+    success_message = "Your suggestion has been forwarded to an administrator, thanks for making BookED a better place !!!"
+
+    def form_valid(self, form):
+
         form.instance.author = self.request.user  # get users name to put on the post
         return super().form_valid(form)

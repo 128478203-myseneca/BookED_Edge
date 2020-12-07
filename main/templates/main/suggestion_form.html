@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Book ED - Suggestion</title>
+
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static  'assets/img/BookED_Logo1.png'  %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+  
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  
+
+</head>
+
+<body>
+
+  <div class='fixed-top'>
+    {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{message}}
+            </div>
+          {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="login-wrap">
+    <div class="login-html">
+      <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Send Suggestion</label>
+      <div class="login-form">
+        <div class="sign-in-htm">
+          <div class="group">
+            <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="user" class="label">What changes would you like to see ?</label>
+            {{  form.short_explanation }}
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Explain your suggestions further !</label>
+            {{ form.content }}
+          </div>
+          <div class="group">
+          <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}">
+          <div class="group">
+            <button class="button" type="submit">Submit Suggestion</button>
+          </div>
+        </div>
+
+  
+
+</body>
+
+</html>

@@ -114,3 +114,26 @@ class Report_User(models.Model):
     class Meta:
         verbose_name_plural = "UserReports"
         ordering = ["-date_posted"]
+
+
+class Suggestion(models.Model):
+    short_explanation = models.CharField(max_length=30)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="UsersSuggestion",
+        null=True,
+        blank=True,
+    )
+    content = models.TextField(max_length=500)
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.short_explanation
+
+    def get_absolute_url(self):
+        return reverse("Main-Home")
+
+    class Meta:
+        verbose_name_plural = "UserSuggestions"
+        ordering = ["-date_posted"]
