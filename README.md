@@ -10,7 +10,7 @@
 
 -https://getbootstrap.com/docs/4.0/utilities/flex/?
 
-**Start virtualenv**
+**Run locally using virtualenv**
 
 - py -m pip install --user virtualenv
 
