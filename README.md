@@ -12,6 +12,8 @@
 
 **Run locally using virtualenv**
 
+- download repository
+
 - py -m pip install --user virtualenv
 
 - py -m venv booked_env
@@ -19,8 +21,10 @@
 - .\env\Scripts\activate
 
 - pip install -r requirements.txt
+  
+- python manage.py runserver
 
-- deactivate
+- deactivate (command to stop virtualenv)
 
 **Packages Used :**
 
